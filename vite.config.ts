@@ -5,11 +5,11 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [
+    tailwindcss(),
     tanstackRouter({
       autoCodeSplitting: true,
       target: 'react'
     }),
-    react(),
-    tailwindcss()
+    react()
   ]
 });
