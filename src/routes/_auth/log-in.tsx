@@ -7,6 +7,7 @@ import { Button } from '../../components/Button';
 import { Heading } from '../../components/Heading';
 import { TextField } from '../../components/TextField';
 import { useAuth } from '../../hooks/useAuth';
+import { formatZodErrors } from '../../utils/formatZodErrors';
 
 const schema = z.object({
   email: z.email(),
@@ -28,7 +29,7 @@ const Component: FC = () => {
       void signIn(email, password);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        setErrors(z.flattenError(error));
+        setErrors(formatZodErrors(error));
       }
     }
   };
@@ -45,11 +46,19 @@ const Component: FC = () => {
         <Form
           className="flex flex-col gap-6"
           errors={errors}
+          onClearErrors={setErrors}
           onSubmit={handleSubmit}
         >
-          <TextField label="Email" placeholder="Email" required type="email" />
+          <TextField
+            label="Email"
+            name="email"
+            placeholder="Email"
+            required
+            type="email"
+          />
           <TextField
             label="Password"
+            name="password"
             placeholder="Password"
             required
             type="password"
