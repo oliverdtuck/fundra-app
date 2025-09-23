@@ -7,7 +7,6 @@ import { Button } from '../../components/Button';
 import { Heading } from '../../components/Heading';
 import { TextField } from '../../components/TextField';
 import { useAuth } from '../../hooks/useAuth';
-import { formatZodErrors } from '../../utils/formatZodErrors';
 
 const schema = z.object({
   email: z.email(),
@@ -29,7 +28,9 @@ const Component: FC = () => {
       void signIn(email, password);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        setErrors(formatZodErrors(error));
+        const { fieldErrors } = z.flattenError(error);
+
+        setErrors(fieldErrors);
       }
     }
   };
