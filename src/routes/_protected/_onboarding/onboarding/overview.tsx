@@ -229,7 +229,7 @@ const Component: FC = () => {
                 What is your investment thesis?
               </Fieldset.Legend>
               <CheckboxGroup
-                className="flex flex-col gap-3"
+                className="flex flex-col gap-2"
                 onValueChange={setThesisIds}
                 value={thesisIds}
               >
