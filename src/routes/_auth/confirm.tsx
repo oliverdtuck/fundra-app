@@ -1,6 +1,7 @@
 import { Form } from '@base-ui-components/react/form';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { type FC, type FormEventHandler, useState } from 'react';
+import toast from 'react-hot-toast';
 import * as z from 'zod';
 
 import { Button } from '../../components/Button';
@@ -18,10 +19,17 @@ const Component: FC = () => {
   const [errors, setErrors] = useState({});
 
   const confirmSignUp = async (code: string) => {
-    await auth.confirmSignUp(email, code);
-    await navigate({
-      to: '/log-in'
-    });
+    try {
+      await auth.confirmSignUp(email, code);
+      toast.success('Account confirmed successfully! You can now log in');
+      await navigate({
+        to: '/log-in'
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      }
+    }
   };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {

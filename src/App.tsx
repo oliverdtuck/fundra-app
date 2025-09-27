@@ -1,6 +1,7 @@
 import { QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider } from '@tanstack/react-router';
 import { type FC, useEffect, useRef } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 import { AuthProvider } from './components/AuthProvider';
 import { useAuth } from './hooks/useAuth';
@@ -38,6 +39,7 @@ export const App: FC = () => (
   <AuthProvider>
     <QueryClientProvider client={queryClient}>
       <InnerApp />
+      <Toaster />
     </QueryClientProvider>
   </AuthProvider>
 );
