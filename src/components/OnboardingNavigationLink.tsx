@@ -19,6 +19,7 @@ export const OnboardingNavigationLink: FC<OnboardingNavigationLinkProps> = ({
   to
 }) => (
   <Link
+    aria-label={children}
     className="flex items-center gap-4 text-sm disabled:cursor-not-allowed"
     disabled={disabled}
     to={to}
@@ -37,7 +38,7 @@ export const OnboardingNavigationLink: FC<OnboardingNavigationLinkProps> = ({
           {completed ? <Check size={16} /> : index + 1}
         </span>
         <span
-          className={clsx({
+          className={clsx('hidden sm:block', {
             'text-gray-500': !isActive
           })}
         >
