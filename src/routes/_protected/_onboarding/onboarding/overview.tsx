@@ -180,7 +180,7 @@ const Component: FC = () => {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-6">
+    <div className="grid gap-6 sm:grid-cols-2">
       <Card>
         <div className="flex flex-col gap-2">
           <Heading level={1}>{renderTitle()}</Heading>
