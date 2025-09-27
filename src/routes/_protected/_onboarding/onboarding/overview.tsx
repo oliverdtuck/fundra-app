@@ -222,7 +222,7 @@ const Component: FC = () => {
           {currentStep === 'INVESTMENT_THESIS' && (
             <Field.Root
               className="flex flex-col gap-6"
-              name="companyTheses"
+              name="thesisIds"
               render={<Fieldset.Root />}
             >
               <Fieldset.Legend className="text-gray-500">
@@ -234,10 +234,13 @@ const Component: FC = () => {
                 value={thesisIds}
               >
                 {thesesSuspenseQuery.data.map((thesis) => (
-                  <Field.Label className="flex justify-between" key={thesis.id}>
+                  <Field.Label
+                    className="flex justify-between text-sm"
+                    key={thesis.id}
+                  >
                     {thesis.name}
                     <Checkbox.Root
-                      className="flex size-6 items-center justify-center rounded-sm border data-[checked]:border-black data-[checked]:bg-black data-[checked]:text-white data-[unchecked]:border-gray-300"
+                      className="flex size-5 items-center justify-center rounded-sm border data-[checked]:border-black data-[checked]:bg-black data-[checked]:text-white data-[unchecked]:border-gray-300"
                       value={thesis.id}
                     >
                       <Checkbox.Indicator>
@@ -247,6 +250,7 @@ const Component: FC = () => {
                   </Field.Label>
                 ))}
               </CheckboxGroup>
+              <Field.Error className="text-sm text-red-500" />
             </Field.Root>
           )}
           <div className="flex justify-between">
