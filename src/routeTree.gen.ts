@@ -12,8 +12,15 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProtectedRouteImport } from './routes/_protected'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as ProtectedIndexRouteImport } from './routes/_protected/index'
+import { Route as ProtectedOnboardingRouteImport } from './routes/_protected/_onboarding'
 import { Route as AuthSignUpRouteImport } from './routes/_auth/sign-up'
 import { Route as AuthLogInRouteImport } from './routes/_auth/log-in'
+import { Route as AuthConfirmRouteImport } from './routes/_auth/confirm'
+import { Route as ProtectedCompaniesCompanyIdIndexRouteImport } from './routes/_protected/companies/$companyId/index'
+import { Route as ProtectedOnboardingOnboardingSectorRouteImport } from './routes/_protected/_onboarding/onboarding/sector'
+import { Route as ProtectedOnboardingOnboardingOverviewRouteImport } from './routes/_protected/_onboarding/onboarding/overview'
+import { Route as ProtectedOnboardingOnboardingFundingStageRouteImport } from './routes/_protected/_onboarding/onboarding/funding-stage'
+import { Route as ProtectedOnboardingOnboardingCompanyInformationRouteImport } from './routes/_protected/_onboarding/onboarding/company-information'
 
 const ProtectedRoute = ProtectedRouteImport.update({
   id: '/_protected',
@@ -28,6 +35,10 @@ const ProtectedIndexRoute = ProtectedIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ProtectedRoute,
 } as any)
+const ProtectedOnboardingRoute = ProtectedOnboardingRouteImport.update({
+  id: '/_onboarding',
+  getParentRoute: () => ProtectedRoute,
+} as any)
 const AuthSignUpRoute = AuthSignUpRouteImport.update({
   id: '/sign-up',
   path: '/sign-up',
@@ -38,37 +49,116 @@ const AuthLogInRoute = AuthLogInRouteImport.update({
   path: '/log-in',
   getParentRoute: () => AuthRoute,
 } as any)
+const AuthConfirmRoute = AuthConfirmRouteImport.update({
+  id: '/confirm',
+  path: '/confirm',
+  getParentRoute: () => AuthRoute,
+} as any)
+const ProtectedCompaniesCompanyIdIndexRoute =
+  ProtectedCompaniesCompanyIdIndexRouteImport.update({
+    id: '/companies/$companyId/',
+    path: '/companies/$companyId/',
+    getParentRoute: () => ProtectedRoute,
+  } as any)
+const ProtectedOnboardingOnboardingSectorRoute =
+  ProtectedOnboardingOnboardingSectorRouteImport.update({
+    id: '/onboarding/sector',
+    path: '/onboarding/sector',
+    getParentRoute: () => ProtectedOnboardingRoute,
+  } as any)
+const ProtectedOnboardingOnboardingOverviewRoute =
+  ProtectedOnboardingOnboardingOverviewRouteImport.update({
+    id: '/onboarding/overview',
+    path: '/onboarding/overview',
+    getParentRoute: () => ProtectedOnboardingRoute,
+  } as any)
+const ProtectedOnboardingOnboardingFundingStageRoute =
+  ProtectedOnboardingOnboardingFundingStageRouteImport.update({
+    id: '/onboarding/funding-stage',
+    path: '/onboarding/funding-stage',
+    getParentRoute: () => ProtectedOnboardingRoute,
+  } as any)
+const ProtectedOnboardingOnboardingCompanyInformationRoute =
+  ProtectedOnboardingOnboardingCompanyInformationRouteImport.update({
+    id: '/onboarding/company-information',
+    path: '/onboarding/company-information',
+    getParentRoute: () => ProtectedOnboardingRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
+  '/confirm': typeof AuthConfirmRoute
   '/log-in': typeof AuthLogInRoute
   '/sign-up': typeof AuthSignUpRoute
   '/': typeof ProtectedIndexRoute
+  '/onboarding/company-information': typeof ProtectedOnboardingOnboardingCompanyInformationRoute
+  '/onboarding/funding-stage': typeof ProtectedOnboardingOnboardingFundingStageRoute
+  '/onboarding/overview': typeof ProtectedOnboardingOnboardingOverviewRoute
+  '/onboarding/sector': typeof ProtectedOnboardingOnboardingSectorRoute
+  '/companies/$companyId': typeof ProtectedCompaniesCompanyIdIndexRoute
 }
 export interface FileRoutesByTo {
+  '/confirm': typeof AuthConfirmRoute
   '/log-in': typeof AuthLogInRoute
   '/sign-up': typeof AuthSignUpRoute
   '/': typeof ProtectedIndexRoute
+  '/onboarding/company-information': typeof ProtectedOnboardingOnboardingCompanyInformationRoute
+  '/onboarding/funding-stage': typeof ProtectedOnboardingOnboardingFundingStageRoute
+  '/onboarding/overview': typeof ProtectedOnboardingOnboardingOverviewRoute
+  '/onboarding/sector': typeof ProtectedOnboardingOnboardingSectorRoute
+  '/companies/$companyId': typeof ProtectedCompaniesCompanyIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_auth': typeof AuthRouteWithChildren
   '/_protected': typeof ProtectedRouteWithChildren
+  '/_auth/confirm': typeof AuthConfirmRoute
   '/_auth/log-in': typeof AuthLogInRoute
   '/_auth/sign-up': typeof AuthSignUpRoute
+  '/_protected/_onboarding': typeof ProtectedOnboardingRouteWithChildren
   '/_protected/': typeof ProtectedIndexRoute
+  '/_protected/_onboarding/onboarding/company-information': typeof ProtectedOnboardingOnboardingCompanyInformationRoute
+  '/_protected/_onboarding/onboarding/funding-stage': typeof ProtectedOnboardingOnboardingFundingStageRoute
+  '/_protected/_onboarding/onboarding/overview': typeof ProtectedOnboardingOnboardingOverviewRoute
+  '/_protected/_onboarding/onboarding/sector': typeof ProtectedOnboardingOnboardingSectorRoute
+  '/_protected/companies/$companyId/': typeof ProtectedCompaniesCompanyIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/log-in' | '/sign-up' | '/'
+  fullPaths:
+    | '/confirm'
+    | '/log-in'
+    | '/sign-up'
+    | '/'
+    | '/onboarding/company-information'
+    | '/onboarding/funding-stage'
+    | '/onboarding/overview'
+    | '/onboarding/sector'
+    | '/companies/$companyId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/log-in' | '/sign-up' | '/'
+  to:
+    | '/confirm'
+    | '/log-in'
+    | '/sign-up'
+    | '/'
+    | '/onboarding/company-information'
+    | '/onboarding/funding-stage'
+    | '/onboarding/overview'
+    | '/onboarding/sector'
+    | '/companies/$companyId'
   id:
     | '__root__'
     | '/_auth'
     | '/_protected'
+    | '/_auth/confirm'
     | '/_auth/log-in'
     | '/_auth/sign-up'
+    | '/_protected/_onboarding'
     | '/_protected/'
+    | '/_protected/_onboarding/onboarding/company-information'
+    | '/_protected/_onboarding/onboarding/funding-stage'
+    | '/_protected/_onboarding/onboarding/overview'
+    | '/_protected/_onboarding/onboarding/sector'
+    | '/_protected/companies/$companyId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -99,6 +189,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedIndexRouteImport
       parentRoute: typeof ProtectedRoute
     }
+    '/_protected/_onboarding': {
+      id: '/_protected/_onboarding'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof ProtectedOnboardingRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
     '/_auth/sign-up': {
       id: '/_auth/sign-up'
       path: '/sign-up'
@@ -113,27 +210,96 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLogInRouteImport
       parentRoute: typeof AuthRoute
     }
+    '/_auth/confirm': {
+      id: '/_auth/confirm'
+      path: '/confirm'
+      fullPath: '/confirm'
+      preLoaderRoute: typeof AuthConfirmRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/_protected/companies/$companyId/': {
+      id: '/_protected/companies/$companyId/'
+      path: '/companies/$companyId'
+      fullPath: '/companies/$companyId'
+      preLoaderRoute: typeof ProtectedCompaniesCompanyIdIndexRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
+    '/_protected/_onboarding/onboarding/sector': {
+      id: '/_protected/_onboarding/onboarding/sector'
+      path: '/onboarding/sector'
+      fullPath: '/onboarding/sector'
+      preLoaderRoute: typeof ProtectedOnboardingOnboardingSectorRouteImport
+      parentRoute: typeof ProtectedOnboardingRoute
+    }
+    '/_protected/_onboarding/onboarding/overview': {
+      id: '/_protected/_onboarding/onboarding/overview'
+      path: '/onboarding/overview'
+      fullPath: '/onboarding/overview'
+      preLoaderRoute: typeof ProtectedOnboardingOnboardingOverviewRouteImport
+      parentRoute: typeof ProtectedOnboardingRoute
+    }
+    '/_protected/_onboarding/onboarding/funding-stage': {
+      id: '/_protected/_onboarding/onboarding/funding-stage'
+      path: '/onboarding/funding-stage'
+      fullPath: '/onboarding/funding-stage'
+      preLoaderRoute: typeof ProtectedOnboardingOnboardingFundingStageRouteImport
+      parentRoute: typeof ProtectedOnboardingRoute
+    }
+    '/_protected/_onboarding/onboarding/company-information': {
+      id: '/_protected/_onboarding/onboarding/company-information'
+      path: '/onboarding/company-information'
+      fullPath: '/onboarding/company-information'
+      preLoaderRoute: typeof ProtectedOnboardingOnboardingCompanyInformationRouteImport
+      parentRoute: typeof ProtectedOnboardingRoute
+    }
   }
 }
 
 interface AuthRouteChildren {
+  AuthConfirmRoute: typeof AuthConfirmRoute
   AuthLogInRoute: typeof AuthLogInRoute
   AuthSignUpRoute: typeof AuthSignUpRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
+  AuthConfirmRoute: AuthConfirmRoute,
   AuthLogInRoute: AuthLogInRoute,
   AuthSignUpRoute: AuthSignUpRoute,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
+interface ProtectedOnboardingRouteChildren {
+  ProtectedOnboardingOnboardingCompanyInformationRoute: typeof ProtectedOnboardingOnboardingCompanyInformationRoute
+  ProtectedOnboardingOnboardingFundingStageRoute: typeof ProtectedOnboardingOnboardingFundingStageRoute
+  ProtectedOnboardingOnboardingOverviewRoute: typeof ProtectedOnboardingOnboardingOverviewRoute
+  ProtectedOnboardingOnboardingSectorRoute: typeof ProtectedOnboardingOnboardingSectorRoute
+}
+
+const ProtectedOnboardingRouteChildren: ProtectedOnboardingRouteChildren = {
+  ProtectedOnboardingOnboardingCompanyInformationRoute:
+    ProtectedOnboardingOnboardingCompanyInformationRoute,
+  ProtectedOnboardingOnboardingFundingStageRoute:
+    ProtectedOnboardingOnboardingFundingStageRoute,
+  ProtectedOnboardingOnboardingOverviewRoute:
+    ProtectedOnboardingOnboardingOverviewRoute,
+  ProtectedOnboardingOnboardingSectorRoute:
+    ProtectedOnboardingOnboardingSectorRoute,
+}
+
+const ProtectedOnboardingRouteWithChildren =
+  ProtectedOnboardingRoute._addFileChildren(ProtectedOnboardingRouteChildren)
+
 interface ProtectedRouteChildren {
+  ProtectedOnboardingRoute: typeof ProtectedOnboardingRouteWithChildren
   ProtectedIndexRoute: typeof ProtectedIndexRoute
+  ProtectedCompaniesCompanyIdIndexRoute: typeof ProtectedCompaniesCompanyIdIndexRoute
 }
 
 const ProtectedRouteChildren: ProtectedRouteChildren = {
+  ProtectedOnboardingRoute: ProtectedOnboardingRouteWithChildren,
   ProtectedIndexRoute: ProtectedIndexRoute,
+  ProtectedCompaniesCompanyIdIndexRoute: ProtectedCompaniesCompanyIdIndexRoute,
 }
 
 const ProtectedRouteWithChildren = ProtectedRoute._addFileChildren(

@@ -1,5 +1,5 @@
 import { Form } from '@base-ui-components/react/form';
-import { createFileRoute, Link } from '@tanstack/react-router';
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { type FC, type FormEventHandler, useState } from 'react';
 import * as z from 'zod';
 
@@ -8,11 +8,21 @@ import { Card } from '../../components/Card';
 import { Heading } from '../../components/Heading';
 import { TextField } from '../../components/TextField';
 import { useAuth } from '../../hooks/useAuth';
-import { logInSchema } from '../../schemas/logInSchema';
+import { confirmSignUpSchema } from '../../schemas/confirmSignUpSchema';
 
 const Component: FC = () => {
-  const { isSigningIn, signIn } = useAuth();
+  const auth = useAuth();
+  const { isConfirmingSignUp } = auth;
+  const { email } = Route.useSearch();
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
+
+  const confirmSignUp = async (code: string) => {
+    await auth.confirmSignUp(email, code);
+    await navigate({
+      to: '/log-in'
+    });
+  };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -20,11 +30,9 @@ const Component: FC = () => {
     const formData = new FormData(event.currentTarget);
 
     try {
-      const { email, password } = logInSchema.parse(
-        Object.fromEntries(formData)
-      );
+      const { code } = confirmSignUpSchema.parse(Object.fromEntries(formData));
 
-      void signIn(email, password);
+      void confirmSignUp(code);
     } catch (error) {
       if (error instanceof z.ZodError) {
         const { fieldErrors } = z.flattenError(error);
@@ -37,9 +45,9 @@ const Component: FC = () => {
   return (
     <>
       <div className="flex flex-col gap-2 text-center">
-        <Heading level={1}>Log In</Heading>
+        <Heading level={1}>Confirm Sign Up</Heading>
         <p className="text-lg text-gray-500">
-          Log in to your account to continue
+          Enter the code sent to your email to confirm your account
         </p>
       </div>
       <Card>
@@ -50,34 +58,24 @@ const Component: FC = () => {
           onSubmit={handleSubmit}
         >
           <TextField
-            label="Email"
-            name="email"
-            placeholder="Email"
+            label="Code"
+            name="code"
+            placeholder="Code"
             required
-            type="email"
+            type="text"
           />
-          <TextField
-            label="Password"
-            name="password"
-            placeholder="Password"
-            required
-            type="password"
-          />
-          <Button loading={isSigningIn} type="submit">
-            Log In
+          <Button loading={isConfirmingSignUp} type="submit">
+            Confirm
           </Button>
         </Form>
-        <p className="text-center text-sm text-gray-500">
-          Don't have an account?{' '}
-          <Link className="text-blue-500" to="/sign-up">
-            Sign Up
-          </Link>
-        </p>
       </Card>
     </>
   );
 };
 
-export const Route = createFileRoute('/_auth/log-in')({
-  component: Component
+export const Route = createFileRoute('/_auth/confirm')({
+  component: Component,
+  validateSearch: z.object({
+    email: z.email()
+  })
 });

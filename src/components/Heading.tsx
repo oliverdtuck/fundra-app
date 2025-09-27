@@ -18,12 +18,12 @@ const headingElements: Record<number, keyof JSX.IntrinsicElements> = {
 };
 
 const headingStyles = {
-  1: 'text-3xl font-bold',
-  2: 'text-2xl font-semibold',
-  3: 'text-xl font-medium',
-  4: 'text-lg font-medium',
-  5: 'text-base font-medium',
-  6: 'text-sm font-medium'
+  1: 'text-2xl font-bold',
+  2: 'text-xl font-semibold',
+  3: 'text-lg font-medium',
+  4: 'text-base font-medium',
+  5: 'text-sm font-medium',
+  6: 'text-xs font-medium'
 };
 
 export const Heading: FC<HeadingProps> = ({

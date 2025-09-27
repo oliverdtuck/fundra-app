@@ -14,6 +14,7 @@ import {
   useMemo,
   useState
 } from 'react';
+import toast from 'react-hot-toast';
 
 import type { AuthState } from '../types/AuthState';
 
@@ -56,6 +57,11 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
           confirmationCode,
           username: email
         });
+        toast.success('Account confirmed successfully! You can now log in');
+      } catch (error) {
+        if (error instanceof Error) {
+          toast.error(error.message);
+        }
       } finally {
         setIsConfirmingSignUp(false);
       }
@@ -71,6 +77,10 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         username: email
       });
       await checkAuthState();
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      }
     } finally {
       setIsSigningIn(false);
     }
@@ -97,6 +107,13 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
           password,
           username: email
         });
+        toast.success(
+          'Account created successfully! Please check your email for verification code'
+        );
+      } catch (error) {
+        if (error instanceof Error) {
+          toast.error(error.message);
+        }
       } finally {
         setIsSigningUp(false);
       }

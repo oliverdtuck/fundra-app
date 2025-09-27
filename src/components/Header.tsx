@@ -7,7 +7,7 @@ interface HeaderProps {
 }
 
 export const Header: FC<HeaderProps> = ({ children }) => (
-  <header className="flex h-14 justify-center border-b border-b-gray-300 bg-white px-4">
+  <header className="flex justify-center bg-white p-4 shadow-sm">
     <div className="flex max-w-3xl grow items-center justify-between">
       <Logo />
       {children}
