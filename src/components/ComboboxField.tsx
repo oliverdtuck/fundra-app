@@ -1,6 +1,6 @@
 import { Combobox } from '@base-ui-components/react/combobox';
 import { Field } from '@base-ui-components/react/field';
-import { CheckIcon, ChevronDownIcon } from 'lucide-react';
+import { Check, ChevronDown } from 'lucide-react';
 import { type FC, useId } from 'react';
 
 export interface ComboboxFieldItem {
@@ -60,7 +60,7 @@ export const ComboboxField: FC<ComboboxFieldProps> = ({
           />
           <Combobox.Trigger className="absolute top-3 right-3 text-gray-500">
             <Combobox.Icon>
-              <ChevronDownIcon size={16} />
+              <ChevronDown size={16} />
             </Combobox.Icon>
           </Combobox.Trigger>
         </div>
@@ -81,7 +81,7 @@ export const ComboboxField: FC<ComboboxFieldProps> = ({
                   >
                     <div>{item.label}</div>
                     <Combobox.ItemIndicator>
-                      <CheckIcon size={16} />
+                      <Check size={16} />
                     </Combobox.ItemIndicator>
                   </Combobox.Item>
                 )}

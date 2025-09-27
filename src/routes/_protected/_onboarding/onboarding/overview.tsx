@@ -4,7 +4,7 @@ import { Field } from '@base-ui-components/react/field';
 import { Fieldset } from '@base-ui-components/react/fieldset';
 import { Form } from '@base-ui-components/react/form';
 import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
-import { ArrowLeftIcon, ArrowRightIcon, CheckIcon } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
 import {
   type ChangeEventHandler,
   type FC,
@@ -244,7 +244,7 @@ const Component: FC = () => {
                       value={thesis.id}
                     >
                       <Checkbox.Indicator>
-                        <CheckIcon size={16} />
+                        <Check size={16} />
                       </Checkbox.Indicator>
                     </Checkbox.Root>
                   </Field.Label>
@@ -259,7 +259,7 @@ const Component: FC = () => {
             ) : (
               <Button
                 onClick={handleBackClick}
-                StartIcon={ArrowLeftIcon}
+                StartIcon={ArrowLeft}
                 type="button"
                 variant="link"
               >
@@ -267,7 +267,7 @@ const Component: FC = () => {
               </Button>
             )}
             <Button
-              EndIcon={ArrowRightIcon}
+              EndIcon={ArrowRight}
               loading={
                 updateCompanyMutation.isPending ||
                 updateCompanyThesesMutation.isPending

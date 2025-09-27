@@ -1,6 +1,6 @@
 import { Form } from '@base-ui-components/react/form';
 import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
-import { ArrowRightIcon } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import {
   type FC,
   type FormEventHandler,
@@ -165,7 +165,7 @@ const Component: FC = () => {
         )}
         <div className="flex items-center justify-between">
           <BackLink to="/onboarding/company-information" />
-          <Button EndIcon={ArrowRightIcon} loading={isPending} type="submit">
+          <Button EndIcon={ArrowRight} loading={isPending} type="submit">
             Continue
           </Button>
         </div>

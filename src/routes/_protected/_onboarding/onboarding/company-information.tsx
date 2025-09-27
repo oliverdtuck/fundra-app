@@ -1,6 +1,6 @@
 import { Form } from '@base-ui-components/react/form';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { ArrowRightIcon } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import {
   type ChangeEventHandler,
   type FC,
@@ -159,7 +159,7 @@ const Component: FC = () => {
           value={website}
         />
         <Button
-          EndIcon={ArrowRightIcon}
+          EndIcon={ArrowRight}
           loading={
             createCompanyMutation.isPending || updateCompanyMutation.isPending
           }

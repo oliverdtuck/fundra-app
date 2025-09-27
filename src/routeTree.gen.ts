@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProtectedRouteImport } from './routes/_protected'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as ProtectedIndexRouteImport } from './routes/_protected/index'
+import { Route as ProtectedSettingsRouteImport } from './routes/_protected/settings'
 import { Route as ProtectedOnboardingRouteImport } from './routes/_protected/_onboarding'
 import { Route as AuthSignUpRouteImport } from './routes/_auth/sign-up'
 import { Route as AuthLogInRouteImport } from './routes/_auth/log-in'
@@ -33,6 +34,11 @@ const AuthRoute = AuthRouteImport.update({
 const ProtectedIndexRoute = ProtectedIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => ProtectedRoute,
+} as any)
+const ProtectedSettingsRoute = ProtectedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => ProtectedRoute,
 } as any)
 const ProtectedOnboardingRoute = ProtectedOnboardingRouteImport.update({
@@ -89,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/confirm': typeof AuthConfirmRoute
   '/log-in': typeof AuthLogInRoute
   '/sign-up': typeof AuthSignUpRoute
+  '/settings': typeof ProtectedSettingsRoute
   '/': typeof ProtectedIndexRoute
   '/onboarding/company-information': typeof ProtectedOnboardingOnboardingCompanyInformationRoute
   '/onboarding/funding-stage': typeof ProtectedOnboardingOnboardingFundingStageRoute
@@ -100,6 +107,7 @@ export interface FileRoutesByTo {
   '/confirm': typeof AuthConfirmRoute
   '/log-in': typeof AuthLogInRoute
   '/sign-up': typeof AuthSignUpRoute
+  '/settings': typeof ProtectedSettingsRoute
   '/': typeof ProtectedIndexRoute
   '/onboarding/company-information': typeof ProtectedOnboardingOnboardingCompanyInformationRoute
   '/onboarding/funding-stage': typeof ProtectedOnboardingOnboardingFundingStageRoute
@@ -115,6 +123,7 @@ export interface FileRoutesById {
   '/_auth/log-in': typeof AuthLogInRoute
   '/_auth/sign-up': typeof AuthSignUpRoute
   '/_protected/_onboarding': typeof ProtectedOnboardingRouteWithChildren
+  '/_protected/settings': typeof ProtectedSettingsRoute
   '/_protected/': typeof ProtectedIndexRoute
   '/_protected/_onboarding/onboarding/company-information': typeof ProtectedOnboardingOnboardingCompanyInformationRoute
   '/_protected/_onboarding/onboarding/funding-stage': typeof ProtectedOnboardingOnboardingFundingStageRoute
@@ -128,6 +137,7 @@ export interface FileRouteTypes {
     | '/confirm'
     | '/log-in'
     | '/sign-up'
+    | '/settings'
     | '/'
     | '/onboarding/company-information'
     | '/onboarding/funding-stage'
@@ -139,6 +149,7 @@ export interface FileRouteTypes {
     | '/confirm'
     | '/log-in'
     | '/sign-up'
+    | '/settings'
     | '/'
     | '/onboarding/company-information'
     | '/onboarding/funding-stage'
@@ -153,6 +164,7 @@ export interface FileRouteTypes {
     | '/_auth/log-in'
     | '/_auth/sign-up'
     | '/_protected/_onboarding'
+    | '/_protected/settings'
     | '/_protected/'
     | '/_protected/_onboarding/onboarding/company-information'
     | '/_protected/_onboarding/onboarding/funding-stage'
@@ -187,6 +199,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof ProtectedIndexRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
+    '/_protected/settings': {
+      id: '/_protected/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof ProtectedSettingsRouteImport
       parentRoute: typeof ProtectedRoute
     }
     '/_protected/_onboarding': {
@@ -292,12 +311,14 @@ const ProtectedOnboardingRouteWithChildren =
 
 interface ProtectedRouteChildren {
   ProtectedOnboardingRoute: typeof ProtectedOnboardingRouteWithChildren
+  ProtectedSettingsRoute: typeof ProtectedSettingsRoute
   ProtectedIndexRoute: typeof ProtectedIndexRoute
   ProtectedCompaniesCompanyIdIndexRoute: typeof ProtectedCompaniesCompanyIdIndexRoute
 }
 
 const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedOnboardingRoute: ProtectedOnboardingRouteWithChildren,
+  ProtectedSettingsRoute: ProtectedSettingsRoute,
   ProtectedIndexRoute: ProtectedIndexRoute,
   ProtectedCompaniesCompanyIdIndexRoute: ProtectedCompaniesCompanyIdIndexRoute,
 }
