@@ -130,6 +130,7 @@ const Component: FC = () => {
         onSubmit={handleSubmit}
       >
         <TextField
+          autoFocus
           label="Name"
           name="name"
           onChange={handleNameChange}

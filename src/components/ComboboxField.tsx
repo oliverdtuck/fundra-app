@@ -9,6 +9,7 @@ export interface ComboboxFieldItem {
 }
 
 interface ComboboxFieldProps {
+  autoFocus?: boolean;
   inputValue?: string;
   items: ComboboxFieldItem[];
   label: string;
@@ -21,6 +22,7 @@ interface ComboboxFieldProps {
 }
 
 export const ComboboxField: FC<ComboboxFieldProps> = ({
+  autoFocus,
   inputValue,
   items,
   label,
@@ -51,6 +53,7 @@ export const ComboboxField: FC<ComboboxFieldProps> = ({
       >
         <div className="relative">
           <Combobox.Input
+            autoFocus={autoFocus}
             className="w-full rounded-lg border border-gray-300 px-[0.9375rem] py-[0.4375rem] data-[focused]:border-black data-[focused]:ring-2 data-[focused]:ring-gray-300 data-[focused]:outline-none data-[invalid]:border-red-500 data-[invalid]:ring-2 data-[invalid]:ring-red-200"
             id={id}
             placeholder={placeholder}

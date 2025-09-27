@@ -99,6 +99,7 @@ const Component: FC = () => {
         onSubmit={handleSubmit}
       >
         <ComboboxField
+          autoFocus
           inputValue={fundingRoundInputValue}
           items={fundingRoundItems}
           label="Funding Round"

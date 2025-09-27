@@ -50,6 +50,7 @@ const Component: FC = () => {
           onSubmit={handleSubmit}
         >
           <TextField
+            autoFocus
             label="Email"
             name="email"
             placeholder="Email"

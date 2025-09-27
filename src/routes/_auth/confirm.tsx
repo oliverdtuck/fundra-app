@@ -58,6 +58,7 @@ const Component: FC = () => {
           onSubmit={handleSubmit}
         >
           <TextField
+            autoFocus
             label="Code"
             name="code"
             placeholder="Code"

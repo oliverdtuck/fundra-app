@@ -139,6 +139,7 @@ const Component: FC = () => {
         onSubmit={handleSubmit}
       >
         <ComboboxField
+          autoFocus
           inputValue={primarySectorInputValue}
           items={primarySectorItems}
           label="Primary Sector"
