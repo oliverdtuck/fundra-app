@@ -30,8 +30,8 @@ export const OnboardingNavigationLink: FC<OnboardingNavigationLinkProps> = ({
           className={clsx(
             'flex size-8 items-center justify-center rounded-full',
             {
-              'bg-black text-white': completed || isActive,
-              'bg-gray-300': !completed && !isActive
+              'bg-black text-white': completed,
+              'bg-gray-300': !completed
             }
           )}
         >
