@@ -75,7 +75,7 @@ const Component: FC = () => {
   const currentStepIndex = steps.findIndex(
     (step) => step.to === location.pathname
   );
-  const progress = ((currentStepIndex + 1) / steps.length) * 100 - 5;
+  const progress = ((currentStepIndex + 1) / steps.length) * 100 - 10;
 
   return (
     <>
