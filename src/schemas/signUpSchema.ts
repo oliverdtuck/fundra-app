@@ -11,19 +11,19 @@ export const signUpSchema = z.object({
     }
 
     if (!/[a-z]/.test(password)) {
-      failed.push('a lowercase letter');
+      failed.push('one lowercase letter');
     }
 
     if (!/[A-Z]/.test(password)) {
-      failed.push('an uppercase letter');
+      failed.push('one uppercase letter');
     }
 
     if (!/\d/.test(password)) {
-      failed.push('a number');
+      failed.push('one number');
     }
 
     if (!/\W/.test(password)) {
-      failed.push('a special character');
+      failed.push('one special character');
     }
 
     if (failed.length > 0) {
