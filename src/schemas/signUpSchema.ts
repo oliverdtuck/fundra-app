@@ -37,6 +37,7 @@ export const signUpSchema = z.object({
         message +=
           failed.slice(0, -1).join(', ') + ', and ' + failed[failed.length - 1];
       }
+
       ctx.addIssue({
         code: 'custom',
         message
