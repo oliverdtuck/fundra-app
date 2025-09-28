@@ -86,6 +86,7 @@ const Component: FC = () => {
           onSubmit={handleSubmit}
         >
           <TextareaField
+            autoFocus
             label="Products & Services"
             name="productsAndServices"
             onChange={handleProductsAndServicesChange}
