@@ -100,7 +100,7 @@ const Component: FC = () => {
               {thesesSuspenseQuery.data.map((thesis) => (
                 // eslint-disable-next-line react-x/no-context-provider
                 <Tooltip.Provider key={thesis.id}>
-                  <Tooltip.Root>
+                  <Tooltip.Root delay={0}>
                     <Tooltip.Trigger
                       render={
                         <Field.Label className="rounded-lg border border-gray-300 p-[0.8125rem] text-sm has-[:checked]:border-black has-[:checked]:bg-gray-100">
