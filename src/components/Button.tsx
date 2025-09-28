@@ -12,7 +12,7 @@ interface ButtonProps {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   StartIcon?: LucideIcon;
   type: 'button' | 'submit';
-  variant?: 'danger' | 'link' | 'primary';
+  variant?: 'danger' | 'primary';
 }
 
 export const Button: FC<ButtonProps> = ({
@@ -40,9 +40,8 @@ export const Button: FC<ButtonProps> = ({
     type={type}
   >
     <span
-      className={clsx('flex items-center justify-center gap-2', {
+      className={clsx('flex items-center justify-center gap-2 text-white', {
         invisible: loading,
-        'text-white': variant !== 'link',
         visible: !loading
       })}
     >

@@ -93,8 +93,11 @@ const Component: FC = () => {
             required
             value={productsAndServices}
           />
-          <div className="flex justify-between">
+          <div className="grid grid-cols-3 items-center gap-2">
             <BackLink to="/onboarding/funding-stage" />
+            <span className="text-center text-sm text-gray-500">
+              Step 1 of 3
+            </span>
             <Button
               EndIcon={ArrowRight}
               loading={updateCompanyMutation.isPending}

@@ -115,8 +115,11 @@ const Component: FC = () => {
             </CheckboxGroup>
             <Field.Error className="text-sm text-red-500" />
           </Field.Root>
-          <div className="flex justify-between">
+          <div className="grid grid-cols-3 items-center gap-2">
             <BackLink to="/onboarding/overview/target-customers" />
+            <span className="text-center text-sm text-gray-500">
+              Step 3 of 3
+            </span>
             <Button
               EndIcon={ArrowRight}
               loading={updateCompanyThesesMutation.isPending}
