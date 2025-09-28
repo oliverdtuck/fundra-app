@@ -42,16 +42,34 @@ export const Route = createFileRoute('/_protected/')({
       });
     }
 
-    if (
-      !productsAndServices ||
-      !targetCustomers ||
-      companyTheses.length === 0
-    ) {
+    if (!productsAndServices) {
       // eslint-disable-next-line @typescript-eslint/only-throw-error
       throw redirect({
-        to: '/onboarding/overview'
+        to: '/onboarding/overview/products-and-services'
       });
     }
+
+    if (!targetCustomers) {
+      // eslint-disable-next-line @typescript-eslint/only-throw-error
+      throw redirect({
+        to: '/onboarding/overview/target-customers'
+      });
+    }
+
+    if (companyTheses.length === 0) {
+      // eslint-disable-next-line @typescript-eslint/only-throw-error
+      throw redirect({
+        to: '/onboarding/overview/investment-thesis'
+      });
+    }
+
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
+    throw redirect({
+      params: {
+        companyId: id
+      },
+      to: '/companies/$companyId'
+    });
   },
   component: Component
 });
