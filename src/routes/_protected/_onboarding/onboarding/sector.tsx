@@ -163,6 +163,7 @@ const Component: FC = () => {
             value={subSectorValue}
           />
         )}
+        {subSectorsQuery.isLoading && <p>Loading sub sectors...</p>}
         <div className="flex items-center justify-between">
           <BackLink to="/onboarding/company-information" />
           <Button EndIcon={ArrowRight} loading={isPending} type="submit">

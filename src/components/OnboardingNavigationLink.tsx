@@ -19,10 +19,14 @@ export const OnboardingNavigationLink: FC<OnboardingNavigationLinkProps> = ({
   to
 }) => (
   <Link
-    aria-label={children}
+    aria-label={`${children}${completed ? ' - completed' : ''}`}
     className="flex items-center gap-4 text-sm disabled:cursor-not-allowed"
     disabled={disabled}
     to={to}
+    {...(disabled && {
+      'aria-disabled': true,
+      tabIndex: -1
+    })}
   >
     {({ isActive }) => (
       <>

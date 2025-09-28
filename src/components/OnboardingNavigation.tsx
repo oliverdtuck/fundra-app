@@ -6,4 +6,8 @@ interface OnboardingNavigationProps {
 
 export const OnboardingNavigation: FC<OnboardingNavigationProps> = ({
   children
-}) => <nav className="flex items-center gap-4">{children}</nav>;
+}) => (
+  <nav aria-label="Onboarding Steps">
+    <ol className="flex items-center gap-4">{children}</ol>
+  </nav>
+);
