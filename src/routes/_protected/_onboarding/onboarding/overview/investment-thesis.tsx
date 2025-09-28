@@ -3,6 +3,7 @@ import { CheckboxGroup } from '@base-ui-components/react/checkbox-group';
 import { Field } from '@base-ui-components/react/field';
 import { Fieldset } from '@base-ui-components/react/fieldset';
 import { Form } from '@base-ui-components/react/form';
+import { Tooltip } from '@base-ui-components/react/tooltip';
 import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
 import { ArrowRight } from 'lucide-react';
 import { type FC, type FormEventHandler, useState } from 'react';
@@ -97,13 +98,29 @@ const Component: FC = () => {
               value={thesisIds}
             >
               {thesesSuspenseQuery.data.map((thesis) => (
-                <Field.Label
-                  className="rounded-lg border border-gray-300 p-[0.8125rem] text-sm has-[:checked]:border-black has-[:checked]:bg-gray-100"
-                  key={thesis.id}
-                >
-                  {thesis.name}
-                  <Checkbox.Root className="sr-only" value={thesis.id} />
-                </Field.Label>
+                // eslint-disable-next-line react-x/no-context-provider
+                <Tooltip.Provider key={thesis.id}>
+                  <Tooltip.Root>
+                    <Tooltip.Trigger
+                      render={
+                        <Field.Label className="rounded-lg border border-gray-300 p-[0.8125rem] text-sm has-[:checked]:border-black has-[:checked]:bg-gray-100">
+                          {thesis.name}
+                          <Checkbox.Root
+                            className="sr-only"
+                            value={thesis.id}
+                          />
+                        </Field.Label>
+                      }
+                    />
+                    <Tooltip.Portal>
+                      <Tooltip.Positioner sideOffset={8}>
+                        <Tooltip.Popup className="w-[var(--anchor-width)] rounded-lg bg-black/90 p-3.5 text-sm text-white">
+                          {thesis.description}
+                        </Tooltip.Popup>
+                      </Tooltip.Positioner>
+                    </Tooltip.Portal>
+                  </Tooltip.Root>
+                </Tooltip.Provider>
               ))}
             </CheckboxGroup>
             <Field.Error className="text-sm text-red-500" />
