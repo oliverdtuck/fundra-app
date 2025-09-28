@@ -5,7 +5,7 @@ import { Fieldset } from '@base-ui-components/react/fieldset';
 import { Form } from '@base-ui-components/react/form';
 import { Tooltip } from '@base-ui-components/react/tooltip';
 import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import { type FC, type FormEventHandler, useState } from 'react';
 import * as z from 'zod';
 
@@ -103,12 +103,13 @@ const Component: FC = () => {
                   <Tooltip.Root delay={0}>
                     <Tooltip.Trigger
                       render={
-                        <Field.Label className="rounded-lg border border-gray-300 p-[0.8125rem] text-sm has-[:checked]:border-black has-[:checked]:bg-gray-100 has-[:checked]:ring-2 has-[:checked]:ring-gray-300">
-                          {thesis.name}
-                          <Checkbox.Root
-                            className="sr-only"
-                            value={thesis.id}
-                          />
+                        <Field.Label className="flex items-center justify-between rounded-lg border border-gray-300 p-[0.8125rem] text-sm has-[:checked]:border-black has-[:checked]:bg-gray-100 has-[:checked]:ring-2 has-[:checked]:ring-gray-300">
+                          <span>{thesis.name}</span>
+                          <Checkbox.Root value={thesis.id}>
+                            <Checkbox.Indicator>
+                              <Check size={16} />
+                            </Checkbox.Indicator>
+                          </Checkbox.Root>
                         </Field.Label>
                       }
                     />
