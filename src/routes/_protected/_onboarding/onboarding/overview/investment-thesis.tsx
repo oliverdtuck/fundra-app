@@ -4,7 +4,7 @@ import { Field } from '@base-ui-components/react/field';
 import { Fieldset } from '@base-ui-components/react/fieldset';
 import { Form } from '@base-ui-components/react/form';
 import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
-import { ArrowRight, Check } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { type FC, type FormEventHandler, useState } from 'react';
 import * as z from 'zod';
 
@@ -67,7 +67,7 @@ const Component: FC = () => {
   };
 
   return (
-    <div className="grid gap-6 sm:grid-cols-2">
+    <div className="grid gap-6 md:grid-cols-2">
       <Card>
         <div className="flex flex-col gap-2">
           <Heading level={1}>Investment Thesis</Heading>
@@ -98,18 +98,11 @@ const Component: FC = () => {
             >
               {thesesSuspenseQuery.data.map((thesis) => (
                 <Field.Label
-                  className="flex justify-between text-sm"
+                  className="rounded-lg border border-gray-300 p-[0.8125rem] text-sm has-[:checked]:border-black has-[:checked]:bg-gray-100"
                   key={thesis.id}
                 >
                   {thesis.name}
-                  <Checkbox.Root
-                    className="flex size-5 items-center justify-center rounded-sm border data-[checked]:border-black data-[checked]:bg-black data-[checked]:text-white data-[unchecked]:border-gray-300"
-                    value={thesis.id}
-                  >
-                    <Checkbox.Indicator>
-                      <Check size={16} />
-                    </Checkbox.Indicator>
-                  </Checkbox.Root>
+                  <Checkbox.Root className="sr-only" value={thesis.id} />
                 </Field.Label>
               ))}
             </CheckboxGroup>

@@ -79,7 +79,7 @@ const Component: FC = () => {
         <UserMenu />
       </Header>
       <main className="flex justify-center px-4 py-16">
-        <div className="flex max-w-3xl grow flex-col gap-6">
+        <div className="flex max-w-4xl grow flex-col gap-6">
           <OnboardingNavigation>
             {steps.map(({ children, completed, disabled, to }, index) => (
               <Fragment key={to}>

@@ -42,7 +42,7 @@ export const OnboardingNavigationLink: FC<OnboardingNavigationLinkProps> = ({
           {completed ? <Check size={16} /> : index + 1}
         </span>
         <span
-          className={clsx('hidden sm:block', {
+          className={clsx('hidden md:block', {
             'text-gray-500': !isActive
           })}
         >
