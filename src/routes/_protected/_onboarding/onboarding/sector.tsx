@@ -26,10 +26,7 @@ import {
   primarySectorsSuspenseQueryOptions,
   usePrimarySectorsSuspenseQuery
 } from '../../../../hooks/usePrimarySectorsSuspenseQuery';
-import {
-  subSectorsQueryOptions,
-  useSubSectorsQuery
-} from '../../../../hooks/useSubSectorsQuery';
+import { useSubSectorsQuery } from '../../../../hooks/useSubSectorsQuery';
 import { useUpdateCompanyMutation } from '../../../../hooks/useUpdateCompanyMutation';
 import { updateCompanySchema } from '../../../../schemas/updateCompanySchema';
 
@@ -199,16 +196,6 @@ export const Route = createFileRoute(
     const { queryClient } = context;
 
     await queryClient.ensureQueryData(primarySectorsSuspenseQueryOptions());
-
-    const [{ primarySector }] = await queryClient.ensureQueryData(
-      companiesSuspenseQueryOptions()
-    );
-
-    if (primarySector) {
-      const { id } = primarySector;
-
-      await queryClient.ensureQueryData(subSectorsQueryOptions(id));
-    }
   },
   pendingComponent: () => <Card>Loading...</Card>
 });
