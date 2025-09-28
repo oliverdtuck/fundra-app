@@ -103,7 +103,7 @@ const Component: FC = () => {
                   <Tooltip.Root delay={0}>
                     <Tooltip.Trigger
                       render={
-                        <Field.Label className="rounded-lg border border-gray-300 p-[0.8125rem] text-sm has-[:checked]:border-black has-[:checked]:bg-gray-100">
+                        <Field.Label className="rounded-lg border border-gray-300 p-[0.8125rem] text-sm has-[:checked]:border-black has-[:checked]:bg-gray-100 has-[:checked]:ring-2 has-[:checked]:ring-gray-300">
                           {thesis.name}
                           <Checkbox.Root
                             className="sr-only"
