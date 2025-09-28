@@ -3,6 +3,7 @@ import { CheckboxGroup } from '@base-ui-components/react/checkbox-group';
 import { Field } from '@base-ui-components/react/field';
 import { Fieldset } from '@base-ui-components/react/fieldset';
 import { Form } from '@base-ui-components/react/form';
+import { ScrollArea } from '@base-ui-components/react/scroll-area';
 import { Tooltip } from '@base-ui-components/react/tooltip';
 import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
 import { ArrowRight, Check } from 'lucide-react';
@@ -77,7 +78,7 @@ const Component: FC = () => {
           </p>
         </div>
       </Card>
-      <Card>
+      <div className="flex flex-col gap-6 rounded-lg border border-gray-300 bg-white">
         <Form
           className="flex flex-col gap-6"
           errors={errors}
@@ -89,44 +90,51 @@ const Component: FC = () => {
             name="thesisIds"
             render={<Fieldset.Root />}
           >
-            <Fieldset.Legend className="text-gray-500">
+            <Fieldset.Legend className="px-[1.9375rem] pt-[1.9375rem] text-gray-500">
               What is your investment thesis?
             </Fieldset.Legend>
-            <CheckboxGroup
-              className="flex flex-col gap-2"
-              onValueChange={setThesisIds}
-              value={thesisIds}
-            >
-              {thesesSuspenseQuery.data.map((thesis) => (
-                // eslint-disable-next-line react-x/no-context-provider
-                <Tooltip.Provider key={thesis.id}>
-                  <Tooltip.Root delay={0}>
-                    <Tooltip.Trigger
-                      render={
-                        <Field.Label className="flex items-center justify-between rounded-lg border border-gray-300 p-[0.8125rem] text-sm has-[:checked]:border-black has-[:checked]:bg-gray-100 has-[:checked]:ring-2 has-[:checked]:ring-gray-300">
-                          <span>{thesis.name}</span>
-                          <Checkbox.Root value={thesis.id}>
-                            <Checkbox.Indicator>
-                              <Check size={16} />
-                            </Checkbox.Indicator>
-                          </Checkbox.Root>
-                        </Field.Label>
-                      }
-                    />
-                    <Tooltip.Portal>
-                      <Tooltip.Positioner sideOffset={8}>
-                        <Tooltip.Popup className="w-[var(--anchor-width)] rounded-lg bg-black/90 p-3.5 text-sm text-white">
-                          {thesis.description}
-                        </Tooltip.Popup>
-                      </Tooltip.Positioner>
-                    </Tooltip.Portal>
-                  </Tooltip.Root>
-                </Tooltip.Provider>
-              ))}
-            </CheckboxGroup>
+            <ScrollArea.Root>
+              <ScrollArea.Viewport className="h-80 overscroll-contain px-[1.9375rem] py-0.5">
+                <CheckboxGroup
+                  className="flex flex-col gap-2"
+                  onValueChange={setThesisIds}
+                  value={thesisIds}
+                >
+                  {thesesSuspenseQuery.data.map((thesis) => (
+                    // eslint-disable-next-line react-x/no-context-provider
+                    <Tooltip.Provider key={thesis.id}>
+                      <Tooltip.Root delay={0}>
+                        <Tooltip.Trigger
+                          render={
+                            <Field.Label className="flex items-center justify-between rounded-lg border border-gray-300 p-[0.8125rem] text-sm has-[:checked]:border-black has-[:checked]:bg-gray-100 has-[:checked]:ring-2 has-[:checked]:ring-gray-300">
+                              <span>{thesis.name}</span>
+                              <Checkbox.Root value={thesis.id}>
+                                <Checkbox.Indicator>
+                                  <Check size={16} />
+                                </Checkbox.Indicator>
+                              </Checkbox.Root>
+                            </Field.Label>
+                          }
+                        />
+                        <Tooltip.Portal>
+                          <Tooltip.Positioner sideOffset={8}>
+                            <Tooltip.Popup className="w-[var(--anchor-width)] rounded-lg bg-black/90 p-3.5 text-sm text-white">
+                              {thesis.description}
+                            </Tooltip.Popup>
+                          </Tooltip.Positioner>
+                        </Tooltip.Portal>
+                      </Tooltip.Root>
+                    </Tooltip.Provider>
+                  ))}
+                </CheckboxGroup>
+              </ScrollArea.Viewport>
+              <ScrollArea.Scrollbar className="mr-[13px] ml-3.5 w-1 rounded bg-gray-200 opacity-0 transition-opacity delay-300 data-[hovering]:opacity-100 data-[hovering]:delay-0 data-[hovering]:duration-75 data-[scrolling]:opacity-100 data-[scrolling]:delay-0 data-[scrolling]:duration-75">
+                <ScrollArea.Thumb className="w-full rounded bg-gray-500" />
+              </ScrollArea.Scrollbar>
+            </ScrollArea.Root>
             <Field.Error className="text-sm text-red-500" />
           </Field.Root>
-          <div className="grid grid-cols-3 items-center gap-2">
+          <div className="grid grid-cols-3 items-center gap-2 px-[1.9375rem] pb-[1.9375rem]">
             <BackLink to="/onboarding/overview/target-customers" />
             <span className="text-center text-sm text-gray-500">
               Step 3 of 3
@@ -140,7 +148,7 @@ const Component: FC = () => {
             </Button>
           </div>
         </Form>
-      </Card>
+      </div>
     </div>
   );
 };
