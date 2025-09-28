@@ -26,7 +26,10 @@ import {
   primarySectorsSuspenseQueryOptions,
   usePrimarySectorsSuspenseQuery
 } from '../../../../hooks/usePrimarySectorsSuspenseQuery';
-import { useSubSectorsQuery } from '../../../../hooks/useSubSectorsQuery';
+import {
+  subSectorsQueryOptions,
+  useSubSectorsQuery
+} from '../../../../hooks/useSubSectorsQuery';
 import { useUpdateCompanyMutation } from '../../../../hooks/useUpdateCompanyMutation';
 import { updateCompanySchema } from '../../../../schemas/updateCompanySchema';
 
@@ -178,8 +181,7 @@ const Component: FC = () => {
 export const Route = createFileRoute(
   '/_protected/_onboarding/onboarding/sector'
 )({
-  component: Component,
-  loader: async ({ context }) => {
+  beforeLoad: async ({ context }) => {
     const { queryClient } = context;
     const companies = await queryClient.ensureQueryData(
       companiesSuspenseQueryOptions()
@@ -191,8 +193,22 @@ export const Route = createFileRoute(
         to: '/onboarding/company-information'
       });
     }
+  },
+  component: Component,
+  loader: async ({ context }) => {
+    const { queryClient } = context;
 
     await queryClient.ensureQueryData(primarySectorsSuspenseQueryOptions());
+
+    const [{ primarySector }] = await queryClient.ensureQueryData(
+      companiesSuspenseQueryOptions()
+    );
+
+    if (primarySector) {
+      const { id } = primarySector;
+
+      await queryClient.ensureQueryData(subSectorsQueryOptions(id));
+    }
   },
   pendingComponent: () => <Card>Loading...</Card>
 });

@@ -24,9 +24,6 @@ export const Route = createFileRoute('/_protected/')({
     const [
       { fundingRound, id, productsAndServices, subSector, targetCustomers }
     ] = companies;
-    const companyTheses = await queryClient.ensureQueryData(
-      companyThesesSuspenseQueryOptions(id)
-    );
 
     if (!subSector) {
       // eslint-disable-next-line @typescript-eslint/only-throw-error
@@ -55,6 +52,10 @@ export const Route = createFileRoute('/_protected/')({
         to: '/onboarding/overview/target-customers'
       });
     }
+
+    const companyTheses = await queryClient.ensureQueryData(
+      companyThesesSuspenseQueryOptions(id)
+    );
 
     if (companyTheses.length === 0) {
       // eslint-disable-next-line @typescript-eslint/only-throw-error

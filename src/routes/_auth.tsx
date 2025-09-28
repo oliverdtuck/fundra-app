@@ -23,7 +23,6 @@ const Component: FC = () => (
 );
 
 export const Route = createFileRoute('/_auth')({
-  // TODO: I think these checks need to change to a single onboarding completed check
   beforeLoad: async ({ context }) => {
     const { auth, queryClient } = context;
     const { user } = auth;
@@ -46,9 +45,6 @@ export const Route = createFileRoute('/_auth')({
     const [
       { fundingRound, id, productsAndServices, subSector, targetCustomers }
     ] = companies;
-    const companyTheses = await queryClient.ensureQueryData(
-      companyThesesSuspenseQueryOptions(id)
-    );
 
     if (!subSector) {
       // eslint-disable-next-line @typescript-eslint/only-throw-error
@@ -77,6 +73,10 @@ export const Route = createFileRoute('/_auth')({
         to: '/onboarding/overview/target-customers'
       });
     }
+
+    const companyTheses = await queryClient.ensureQueryData(
+      companyThesesSuspenseQueryOptions(id)
+    );
 
     if (companyTheses.length === 0) {
       // eslint-disable-next-line @typescript-eslint/only-throw-error

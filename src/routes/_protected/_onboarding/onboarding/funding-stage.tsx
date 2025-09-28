@@ -124,8 +124,7 @@ const Component: FC = () => {
 export const Route = createFileRoute(
   '/_protected/_onboarding/onboarding/funding-stage'
 )({
-  component: Component,
-  loader: async ({ context }) => {
+  beforeLoad: async ({ context }) => {
     const { queryClient } = context;
     const companies = await queryClient.ensureQueryData(
       companiesSuspenseQueryOptions()
@@ -147,5 +146,6 @@ export const Route = createFileRoute(
       });
     }
   },
+  component: Component,
   pendingComponent: () => <Card>Loading...</Card>
 });
