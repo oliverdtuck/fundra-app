@@ -9,7 +9,8 @@ import { companyThesesSuspenseQueryOptions } from '../../hooks/useCompanyThesesS
 const Component: FC = () => <div>Home</div>;
 
 export const Route = createFileRoute('/_protected/')({
-  beforeLoad: async ({ context }) => {
+  component: Component,
+  loader: async ({ context }) => {
     const { queryClient } = context;
     const companies = await queryClient.ensureQueryData(
       companiesSuspenseQueryOptions()
@@ -73,7 +74,6 @@ export const Route = createFileRoute('/_protected/')({
       to: '/companies/$companyId'
     });
   },
-  component: Component,
   pendingComponent: () => (
     <main className="flex h-screen items-center justify-center">
       <Spinner />

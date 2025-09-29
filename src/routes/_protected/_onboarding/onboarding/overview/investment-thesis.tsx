@@ -163,7 +163,8 @@ const Component: FC = () => {
 export const Route = createFileRoute(
   '/_protected/_onboarding/onboarding/overview/investment-thesis'
 )({
-  beforeLoad: async ({ context }) => {
+  component: Component,
+  loader: async ({ context }) => {
     const { queryClient } = context;
     const companies = await queryClient.ensureQueryData(
       companiesSuspenseQueryOptions()
@@ -176,8 +177,9 @@ export const Route = createFileRoute(
       });
     }
 
-    const [{ fundingRound, productsAndServices, subSector, targetCustomers }] =
-      companies;
+    const [
+      { fundingRound, id, productsAndServices, subSector, targetCustomers }
+    ] = companies;
 
     if (!subSector) {
       // eslint-disable-next-line @typescript-eslint/only-throw-error
@@ -206,13 +208,6 @@ export const Route = createFileRoute(
         to: '/onboarding/overview/target-customers'
       });
     }
-  },
-  component: Component,
-  loader: async ({ context }) => {
-    const { queryClient } = context;
-    const [{ id }] = await queryClient.ensureQueryData(
-      companiesSuspenseQueryOptions()
-    );
 
     await queryClient.ensureQueryData(companyThesesSuspenseQueryOptions(id));
     await queryClient.ensureQueryData(thesesSuspenseQueryOptions());

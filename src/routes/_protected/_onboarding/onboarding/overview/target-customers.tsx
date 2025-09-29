@@ -115,7 +115,8 @@ const Component: FC = () => {
 export const Route = createFileRoute(
   '/_protected/_onboarding/onboarding/overview/target-customers'
 )({
-  beforeLoad: async ({ context }) => {
+  component: Component,
+  loader: async ({ context }) => {
     const { queryClient } = context;
     const companies = await queryClient.ensureQueryData(
       companiesSuspenseQueryOptions()
@@ -151,7 +152,6 @@ export const Route = createFileRoute(
       });
     }
   },
-  component: Component,
   pendingComponent: () => (
     <Card>
       <Spinner className="self-center" />
