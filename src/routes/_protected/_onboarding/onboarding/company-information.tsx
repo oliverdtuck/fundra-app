@@ -60,10 +60,6 @@ const Component: FC = () => {
     const [{ country }] = companiesSuspenseQuery.data;
     const { code } = country;
 
-    if (!code) {
-      return null;
-    }
-
     return countryItems.find((item) => item.value === code) ?? null;
   }, [companiesSuspenseQuery.data, countryItems]);
   const [countryValue, setCountryValue] = useState<ComboboxFieldItem | null>(

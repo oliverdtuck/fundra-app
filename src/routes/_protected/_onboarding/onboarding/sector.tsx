@@ -1,7 +1,14 @@
 import { Form } from '@base-ui-components/react/form';
 import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
 import { ArrowRight } from 'lucide-react';
-import { type FC, type FormEventHandler, useMemo, useState } from 'react';
+import {
+  type FC,
+  type FormEventHandler,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react';
 import * as z from 'zod';
 
 import { BackLink } from '../../../../components/BackLink';
@@ -86,6 +93,16 @@ const Component: FC = () => {
   const [subSectorInputValue, setSubSectorInputValue] = useState(
     defaultSubSectorValue?.label ?? ''
   );
+  const hasSetInitialSubSector = useRef(false);
+
+  useEffect(() => {
+    if (defaultSubSectorValue && !hasSetInitialSubSector.current) {
+      setSubSectorValue(defaultSubSectorValue);
+      setSubSectorInputValue(defaultSubSectorValue.label);
+
+      hasSetInitialSubSector.current = true;
+    }
+  }, [defaultSubSectorValue]);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
