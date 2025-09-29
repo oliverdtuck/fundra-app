@@ -90,11 +90,11 @@ const Component: FC = () => {
   const [subSectorInputValue, setSubSectorInputValue] = useState('');
 
   useEffect(() => {
-    if (defaultSubSectorValue && !subSectorValue) {
+    if (defaultSubSectorValue) {
       setSubSectorValue(defaultSubSectorValue);
       setSubSectorInputValue(defaultSubSectorValue.label);
     }
-  }, [defaultSubSectorValue, subSectorValue]);
+  }, [defaultSubSectorValue]);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
