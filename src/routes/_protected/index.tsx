@@ -2,6 +2,7 @@ import type { FC } from 'react';
 
 import { createFileRoute, redirect } from '@tanstack/react-router';
 
+import { Spinner } from '../../components/Spinner';
 import { companiesSuspenseQueryOptions } from '../../hooks/useCompaniesSuspenseQuery';
 import { companyThesesSuspenseQueryOptions } from '../../hooks/useCompanyThesesSuspenseQuery';
 
@@ -72,5 +73,10 @@ export const Route = createFileRoute('/_protected/')({
       to: '/companies/$companyId'
     });
   },
-  component: Component
+  component: Component,
+  pendingComponent: () => (
+    <main className="flex h-screen items-center justify-center">
+      <Spinner />
+    </main>
+  )
 });

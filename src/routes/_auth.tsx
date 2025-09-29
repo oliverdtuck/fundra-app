@@ -4,6 +4,7 @@ import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
 import { CircleQuestionMark } from 'lucide-react';
 
 import { Header } from '../components/Header';
+import { Spinner } from '../components/Spinner';
 import { companiesSuspenseQueryOptions } from '../hooks/useCompaniesSuspenseQuery';
 import { companyThesesSuspenseQueryOptions } from '../hooks/useCompanyThesesSuspenseQuery';
 
@@ -93,5 +94,10 @@ export const Route = createFileRoute('/_auth')({
       to: '/companies/$companyId'
     });
   },
-  component: Component
+  component: Component,
+  pendingComponent: () => (
+    <main className="flex h-screen items-center justify-center">
+      <Spinner />
+    </main>
+  )
 });

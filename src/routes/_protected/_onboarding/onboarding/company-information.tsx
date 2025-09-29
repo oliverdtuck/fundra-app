@@ -91,7 +91,6 @@ const Component: FC = () => {
 
       const [{ id }] = data;
 
-      // TODO: If there are no changes we can navigate to the next step
       updateCompanyMutation.mutate({
         ...variables,
         companyId: id
