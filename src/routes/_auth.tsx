@@ -24,7 +24,8 @@ const Component: FC = () => (
 );
 
 export const Route = createFileRoute('/_auth')({
-  beforeLoad: async ({ context }) => {
+  component: Component,
+  loader: async ({ context }) => {
     const { auth, queryClient } = context;
     const { user } = auth;
 
@@ -94,7 +95,6 @@ export const Route = createFileRoute('/_auth')({
       to: '/companies/$companyId'
     });
   },
-  component: Component,
   pendingComponent: () => (
     <main className="flex h-screen items-center justify-center">
       <Spinner />
