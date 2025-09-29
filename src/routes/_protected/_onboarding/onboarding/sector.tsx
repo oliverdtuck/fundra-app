@@ -1,13 +1,7 @@
 import { Form } from '@base-ui-components/react/form';
 import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
 import { ArrowRight } from 'lucide-react';
-import {
-  type FC,
-  type FormEventHandler,
-  useEffect,
-  useMemo,
-  useState
-} from 'react';
+import { type FC, type FormEventHandler, useMemo, useState } from 'react';
 import * as z from 'zod';
 
 import { BackLink } from '../../../../components/BackLink';
@@ -51,15 +45,17 @@ const Component: FC = () => {
       })),
     [primarySectorsSuspenseQuery.data]
   );
-  let defaultPrimarySectorValue: ComboboxFieldItem | null = null;
-  const selectedPrimarySectorItem = primarySectorItems.find(
-    (item) => item.value === companiesSuspenseQuery.data[0].primarySector?.id
-  );
+  const defaultPrimarySectorValue = useMemo<ComboboxFieldItem | null>(() => {
+    const primarySectorId = companiesSuspenseQuery.data[0].primarySector?.id;
 
-  if (selectedPrimarySectorItem) {
-    defaultPrimarySectorValue = selectedPrimarySectorItem;
-  }
+    if (!primarySectorId) {
+      return null;
+    }
 
+    return (
+      primarySectorItems.find((item) => item.value === primarySectorId) ?? null
+    );
+  }, [companiesSuspenseQuery.data, primarySectorItems]);
   const [primarySectorValue, setPrimarySectorValue] =
     useState<ComboboxFieldItem | null>(defaultPrimarySectorValue);
   const [primarySectorInputValue, setPrimarySectorInputValue] = useState(
@@ -76,25 +72,20 @@ const Component: FC = () => {
       })) ?? [],
     [subSectorsQuery.data]
   );
-  let defaultSubSectorValue: ComboboxFieldItem | null = null;
-  const selectedSubSectorItem = subSectorItems.find(
-    (item) => item.value === companiesSuspenseQuery.data[0].subSector?.id
-  );
+  const defaultSubSectorValue = useMemo<ComboboxFieldItem | null>(() => {
+    const subSectorId = companiesSuspenseQuery.data[0].subSector?.id;
 
-  if (selectedSubSectorItem) {
-    defaultSubSectorValue = selectedSubSectorItem;
-  }
-
-  const [subSectorValue, setSubSectorValue] =
-    useState<ComboboxFieldItem | null>(null);
-  const [subSectorInputValue, setSubSectorInputValue] = useState('');
-
-  useEffect(() => {
-    if (defaultSubSectorValue) {
-      setSubSectorValue(defaultSubSectorValue);
-      setSubSectorInputValue(defaultSubSectorValue.label);
+    if (!subSectorId) {
+      return null;
     }
-  }, [defaultSubSectorValue]);
+
+    return subSectorItems.find((item) => item.value === subSectorId) ?? null;
+  }, [companiesSuspenseQuery.data, subSectorItems]);
+  const [subSectorValue, setSubSectorValue] =
+    useState<ComboboxFieldItem | null>(defaultSubSectorValue);
+  const [subSectorInputValue, setSubSectorInputValue] = useState(
+    defaultSubSectorValue?.label ?? ''
+  );
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
