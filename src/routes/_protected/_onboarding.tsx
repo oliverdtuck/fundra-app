@@ -9,6 +9,7 @@ import {
 } from '../../components/OnboardingNavigationLink';
 import { OnboardingNavigationSeparator } from '../../components/OnboardingNavigationSeparator';
 import { ProgressBar } from '../../components/ProgressBar';
+import { Spinner } from '../../components/Spinner';
 import { UserMenu } from '../../components/UserMenu';
 import {
   companiesSuspenseQueryOptions,
@@ -110,5 +111,10 @@ export const Route = createFileRoute('/_protected/_onboarding')({
 
     await queryClient.ensureQueryData(companiesSuspenseQueryOptions());
     await queryClient.ensureQueryData(meSuspenseQueryOptions());
-  }
+  },
+  pendingComponent: () => (
+    <main className="flex h-screen items-center justify-center">
+      <Spinner />
+    </main>
+  )
 });
