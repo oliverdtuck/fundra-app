@@ -58,7 +58,7 @@ export const ComboboxField: FC<ComboboxFieldProps> = ({
             id={id}
             placeholder={placeholder}
           />
-          <Combobox.Trigger className="absolute top-3 right-3 text-gray-500">
+          <Combobox.Trigger className="absolute top-3 right-4 text-gray-500">
             <Combobox.Icon>
               <ChevronDown size={16} />
             </Combobox.Icon>
