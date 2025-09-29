@@ -139,7 +139,7 @@ const Component: FC = () => {
                 <ScrollArea.Thumb className="w-full rounded bg-gray-500" />
               </ScrollArea.Scrollbar>
             </ScrollArea.Root>
-            <Field.Error className="text-sm text-red-500" />
+            <Field.Error className="px-[1.9375rem] text-sm text-red-500" />
           </Field.Root>
           <div className="grid grid-cols-3 items-center gap-2 px-[1.9375rem] pb-[1.9375rem]">
             <BackLink to="/onboarding/overview/target-customers" />
