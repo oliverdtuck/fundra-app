@@ -48,15 +48,17 @@ const Component: FC = () => {
     ],
     []
   );
-  let defaultFundingRoundValue: ComboboxFieldItem | null = null;
-  const selectedFundingRoundItem = fundingRoundItems.find(
-    (item) => item.value === companiesSuspenseQuery.data[0].fundingRound
-  );
+  const defaultFundingRoundValue = useMemo<ComboboxFieldItem | null>(() => {
+    const [{ fundingRound }] = companiesSuspenseQuery.data;
 
-  if (selectedFundingRoundItem) {
-    defaultFundingRoundValue = selectedFundingRoundItem;
-  }
+    if (!fundingRound) {
+      return null;
+    }
 
+    return (
+      fundingRoundItems.find((item) => item.value === fundingRound) ?? null
+    );
+  }, [companiesSuspenseQuery.data, fundingRoundItems]);
   const [fundingRoundValue, setFundingRoundValue] =
     useState<ComboboxFieldItem | null>(defaultFundingRoundValue);
   const [fundingRoundInputValue, setFundingRoundInputValue] = useState(

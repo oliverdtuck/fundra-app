@@ -56,15 +56,16 @@ const Component: FC = () => {
       })),
     [countriesSuspenseQuery.data]
   );
-  let defaultCountryValue: ComboboxFieldItem | null = null;
-  const selectedCountryItem = countryItems.find(
-    (item) => item.value === companiesSuspenseQuery.data[0]?.country.code
-  );
+  const defaultCountryValue = useMemo<ComboboxFieldItem | null>(() => {
+    const [{ country }] = companiesSuspenseQuery.data;
+    const { code } = country;
 
-  if (selectedCountryItem) {
-    defaultCountryValue = selectedCountryItem;
-  }
+    if (!code) {
+      return null;
+    }
 
+    return countryItems.find((item) => item.value === code) ?? null;
+  }, [companiesSuspenseQuery.data, countryItems]);
   const [countryValue, setCountryValue] = useState<ComboboxFieldItem | null>(
     defaultCountryValue
   );
