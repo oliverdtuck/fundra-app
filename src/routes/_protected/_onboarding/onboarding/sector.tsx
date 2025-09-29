@@ -164,7 +164,7 @@ const Component: FC = () => {
             value={subSectorValue}
           />
         )}
-        {subSectorsQuery.isLoading && <Spinner />}
+        {subSectorsQuery.isLoading && <Spinner className="align-self-center" />}
         <div className="flex items-center justify-between">
           <BackLink to="/onboarding/company-information" />
           <Button EndIcon={ArrowRight} loading={isPending} type="submit">
@@ -200,7 +200,7 @@ export const Route = createFileRoute(
   },
   pendingComponent: () => (
     <Card>
-      <Spinner />
+      <Spinner className="align-self-center" />
     </Card>
   )
 });

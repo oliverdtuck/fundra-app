@@ -149,7 +149,7 @@ export const Route = createFileRoute(
   component: Component,
   pendingComponent: () => (
     <Card>
-      <Spinner />
+      <Spinner className="align-self-center" />
     </Card>
   )
 });
