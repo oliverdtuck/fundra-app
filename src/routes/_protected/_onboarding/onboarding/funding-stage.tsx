@@ -12,6 +12,7 @@ import {
   type ComboboxFieldItem
 } from '../../../../components/ComboboxField';
 import { Heading } from '../../../../components/Heading';
+import { Spinner } from '../../../../components/Spinner';
 import {
   companiesSuspenseQueryOptions,
   useCompaniesSuspenseQuery
@@ -147,5 +148,9 @@ export const Route = createFileRoute(
     }
   },
   component: Component,
-  pendingComponent: () => <Card>Loading...</Card>
+  pendingComponent: () => (
+    <Card>
+      <Spinner />
+    </Card>
+  )
 });

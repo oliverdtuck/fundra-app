@@ -13,6 +13,7 @@ import { BackLink } from '../../../../../components/BackLink';
 import { Button } from '../../../../../components/Button';
 import { Card } from '../../../../../components/Card';
 import { Heading } from '../../../../../components/Heading';
+import { Spinner } from '../../../../../components/Spinner';
 import { TextareaField } from '../../../../../components/TextareaField';
 import {
   companiesSuspenseQueryOptions,
@@ -146,5 +147,9 @@ export const Route = createFileRoute(
     }
   },
   component: Component,
-  pendingComponent: () => <Card>Loading...</Card>
+  pendingComponent: () => (
+    <Card>
+      <Spinner />
+    </Card>
+  )
 });

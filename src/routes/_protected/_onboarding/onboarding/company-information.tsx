@@ -17,6 +17,7 @@ import {
   type ComboboxFieldItem
 } from '../../../../components/ComboboxField';
 import { Heading } from '../../../../components/Heading';
+import { Spinner } from '../../../../components/Spinner';
 import { TextField } from '../../../../components/TextField';
 import { useCompaniesSuspenseQuery } from '../../../../hooks/useCompaniesSuspenseQuery';
 import {
@@ -181,5 +182,9 @@ export const Route = createFileRoute(
 
     await queryClient.ensureQueryData(countriesSuspenseQueryOptions());
   },
-  pendingComponent: () => <Card>Loading...</Card>
+  pendingComponent: () => (
+    <Card>
+      <Spinner />
+    </Card>
+  )
 });

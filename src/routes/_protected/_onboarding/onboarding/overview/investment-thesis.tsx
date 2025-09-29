@@ -7,13 +7,14 @@ import { ScrollArea } from '@base-ui-components/react/scroll-area';
 import { Tooltip } from '@base-ui-components/react/tooltip';
 import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
 import { ArrowRight, Check } from 'lucide-react';
-import { type FC, type FormEventHandler, useState } from 'react';
+import { type FC, type FormEventHandler, useRef, useState } from 'react';
 import * as z from 'zod';
 
 import { BackLink } from '../../../../../components/BackLink';
 import { Button } from '../../../../../components/Button';
 import { Card } from '../../../../../components/Card';
 import { Heading } from '../../../../../components/Heading';
+import { Spinner } from '../../../../../components/Spinner';
 import {
   companiesSuspenseQueryOptions,
   useCompaniesSuspenseQuery
@@ -46,6 +47,7 @@ const Component: FC = () => {
   const [thesisIds, setThesisIds] = useState<string[]>(
     companyThesesSuspenseQuery.data.map((thesis) => thesis.id)
   );
+  const scrollAreaViewportRef = useRef<HTMLDivElement>(null);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -94,7 +96,10 @@ const Component: FC = () => {
               What is your investment thesis?
             </Fieldset.Legend>
             <ScrollArea.Root>
-              <ScrollArea.Viewport className="h-80 overscroll-contain px-[1.9375rem] py-0.5">
+              <ScrollArea.Viewport
+                className="h-80 overscroll-contain px-[1.9375rem] py-0.5"
+                ref={scrollAreaViewportRef}
+              >
                 <CheckboxGroup
                   className="flex flex-col gap-2"
                   onValueChange={setThesisIds}
@@ -116,7 +121,9 @@ const Component: FC = () => {
                             </Field.Label>
                           }
                         />
-                        <Tooltip.Portal>
+                        <Tooltip.Portal
+                          container={scrollAreaViewportRef.current}
+                        >
                           <Tooltip.Positioner sideOffset={8}>
                             <Tooltip.Popup className="w-[var(--anchor-width)] rounded-lg bg-black/90 p-3.5 text-sm text-white">
                               {thesis.description}
@@ -210,5 +217,9 @@ export const Route = createFileRoute(
     await queryClient.ensureQueryData(companyThesesSuspenseQueryOptions(id));
     await queryClient.ensureQueryData(thesesSuspenseQueryOptions());
   },
-  pendingComponent: () => <Card>Loading...</Card>
+  pendingComponent: () => (
+    <Card>
+      <Spinner />
+    </Card>
+  )
 });

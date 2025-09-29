@@ -18,7 +18,7 @@ import {
 import type { AuthState } from '../types/AuthState';
 
 import { AuthContext } from '../contexts/AuthContext';
-import { Loader } from './Loader';
+import { Spinner } from './Spinner';
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -132,7 +132,11 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   );
 
   if (isLoading) {
-    return <Loader />;
+    return (
+      <main className="flex h-screen items-center justify-center">
+        <Spinner />
+      </main>
+    );
   }
 
   return <AuthContext value={value}>{children}</AuthContext>;
