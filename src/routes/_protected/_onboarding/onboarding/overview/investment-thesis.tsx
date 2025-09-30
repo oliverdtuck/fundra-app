@@ -107,7 +107,7 @@ const Component: FC = () => {
                       <Tooltip.Root delay={0}>
                         <Tooltip.Trigger
                           render={
-                            <Field.Label className="flex items-center justify-between rounded-lg border border-gray-300 p-[0.8125rem] text-sm has-[:checked]:border-black has-[:checked]:bg-gray-100 has-[:checked]:ring-2 has-[:checked]:ring-gray-300">
+                            <Field.Label className="flex items-center justify-between rounded-lg border border-gray-300 px-[0.9375rem] py-[0.5625rem] text-sm has-[:checked]:border-black has-[:checked]:bg-gray-100 has-[:checked]:ring-2 has-[:checked]:ring-gray-300">
                               <span>{thesis.name}</span>
                               <Checkbox.Root value={thesis.id}>
                                 <Checkbox.Indicator>
@@ -119,7 +119,7 @@ const Component: FC = () => {
                         />
                         <Tooltip.Portal>
                           <Tooltip.Positioner sideOffset={8}>
-                            <Tooltip.Popup className="w-[var(--anchor-width)] rounded-lg bg-black/90 p-3.5 text-sm text-white">
+                            <Tooltip.Popup className="w-[var(--anchor-width)] rounded-lg bg-black/90 px-4 py-2.5 text-sm text-white">
                               {thesis.description}
                             </Tooltip.Popup>
                           </Tooltip.Positioner>
