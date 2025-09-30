@@ -37,9 +37,7 @@ export const ComboboxField: FC<ComboboxFieldProps> = ({
 
   return (
     <Field.Root className="flex flex-col gap-2">
-      <label className="text-sm" htmlFor={id}>
-        {label}
-      </label>
+      <Field.Label className="text-sm">{label}</Field.Label>
       <Combobox.Root
         inputValue={inputValue}
         items={items}
