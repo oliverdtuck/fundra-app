@@ -60,17 +60,15 @@ export const ComboboxField: FC<ComboboxFieldProps> = ({
           id={id}
           placeholder={placeholder}
         />
-        {loading && (
-          <Spinner
-            className="absolute top-10 left-1/2 -translate-x-1/2"
-            size="sm"
-          />
+        {loading ? (
+          <Spinner className="absolute top-10 right-4" size="sm" />
+        ) : (
+          <Combobox.Trigger className="absolute top-10 right-4 text-gray-500">
+            <Combobox.Icon>
+              <ChevronDown size={16} />
+            </Combobox.Icon>
+          </Combobox.Trigger>
         )}
-        <Combobox.Trigger className="absolute top-10 right-4 text-gray-500">
-          <Combobox.Icon>
-            <ChevronDown size={16} />
-          </Combobox.Icon>
-        </Combobox.Trigger>
         <Combobox.Portal>
           <Combobox.Positioner sideOffset={8}>
             <Combobox.Popup className="w-[var(--anchor-width)] rounded-lg border border-gray-300 bg-white p-[0.4375rem] shadow-sm">
