@@ -36,7 +36,7 @@ export const ComboboxField: FC<ComboboxFieldProps> = ({
   const id = useId();
 
   return (
-    <Field.Root className="flex flex-col gap-2">
+    <Field.Root className="relative flex flex-col gap-2">
       <Field.Label className="text-sm">{label}</Field.Label>
       <Combobox.Root
         inputValue={inputValue}
@@ -49,19 +49,17 @@ export const ComboboxField: FC<ComboboxFieldProps> = ({
         required={required}
         value={value}
       >
-        <div className="relative">
-          <Combobox.Input
-            autoFocus={autoFocus}
-            className="w-full rounded-lg border border-gray-300 px-[0.9375rem] py-[0.4375rem] data-[focused]:border-black data-[focused]:ring-2 data-[focused]:ring-gray-300 data-[focused]:outline-none data-[invalid]:border-red-500 data-[invalid]:ring-2 data-[invalid]:ring-red-200"
-            id={id}
-            placeholder={placeholder}
-          />
-          <Combobox.Trigger className="absolute top-3 right-4 text-gray-500">
-            <Combobox.Icon>
-              <ChevronDown size={16} />
-            </Combobox.Icon>
-          </Combobox.Trigger>
-        </div>
+        <Combobox.Input
+          autoFocus={autoFocus}
+          className="w-full rounded-lg border border-gray-300 px-[0.9375rem] py-[0.4375rem] data-[focused]:border-black data-[focused]:ring-2 data-[focused]:ring-gray-300 data-[focused]:outline-none data-[invalid]:border-red-500 data-[invalid]:ring-2 data-[invalid]:ring-red-200"
+          id={id}
+          placeholder={placeholder}
+        />
+        <Combobox.Trigger className="absolute top-10 right-4 text-gray-500">
+          <Combobox.Icon>
+            <ChevronDown size={16} />
+          </Combobox.Icon>
+        </Combobox.Trigger>
         <Combobox.Portal>
           <Combobox.Positioner sideOffset={8}>
             <Combobox.Popup className="w-[var(--anchor-width)] rounded-lg border border-gray-300 bg-white p-[0.4375rem] shadow-sm">
