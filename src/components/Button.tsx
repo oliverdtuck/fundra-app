@@ -3,6 +3,8 @@ import type { FC, MouseEventHandler } from 'react';
 
 import clsx, { type ClassValue } from 'clsx';
 
+import { Spinner } from './Spinner';
+
 interface ButtonProps {
   children: string;
   className?: ClassValue;
@@ -35,7 +37,8 @@ export const Button: FC<ButtonProps> = ({
       },
       className
     )}
-    disabled={disabled ?? loading}
+    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+    disabled={disabled || loading}
     onClick={onClick}
     type={type}
   >
@@ -50,7 +53,11 @@ export const Button: FC<ButtonProps> = ({
       {EndIcon && <EndIcon size={16} />}
     </span>
     {loading && (
-      <span className="absolute top-1/2 left-1/2 size-4 -translate-1/2 animate-spin rounded-full border-2 border-x-white/30 border-t-white border-b-white/30" />
+      <Spinner
+        className="absolute top-1/2 left-1/2 -translate-1/2"
+        size="sm"
+        variant="white"
+      />
     )}
   </button>
 );

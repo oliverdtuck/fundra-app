@@ -159,20 +159,18 @@ const Component: FC = () => {
           required
           value={primarySectorValue}
         />
-        {subSectorsQuery.data && (
-          <ComboboxField
-            inputValue={subSectorInputValue}
-            items={subSectorItems}
-            label="Sub Sector"
-            name="subSectorId"
-            onInputValueChange={setSubSectorInputValue}
-            onValueChange={setSubSectorValue}
-            placeholder="Sub Sector"
-            required
-            value={subSectorValue}
-          />
-        )}
-        {subSectorsQuery.isLoading && <Spinner className="self-center" />}
+        <ComboboxField
+          inputValue={subSectorInputValue}
+          items={subSectorItems}
+          label="Sub Sector"
+          loading={subSectorsQuery.isLoading}
+          name="subSectorId"
+          onInputValueChange={setSubSectorInputValue}
+          onValueChange={setSubSectorValue}
+          placeholder="Sub Sector"
+          required
+          value={subSectorValue}
+        />
         <div className="flex items-center justify-between">
           <BackLink to="/onboarding/company-information" />
           <Button EndIcon={ArrowRight} loading={isPending} type="submit">

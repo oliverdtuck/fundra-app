@@ -3,6 +3,8 @@ import { Field } from '@base-ui-components/react/field';
 import { Check, ChevronDown } from 'lucide-react';
 import { type FC, useId } from 'react';
 
+import { Spinner } from './Spinner';
+
 export interface ComboboxFieldItem {
   label: string;
   value: string;
@@ -13,6 +15,7 @@ interface ComboboxFieldProps {
   inputValue?: string;
   items: ComboboxFieldItem[];
   label: string;
+  loading?: boolean;
   name: string;
   onInputValueChange?: (value: string) => void;
   onValueChange?: (value: ComboboxFieldItem | null) => void;
@@ -26,6 +29,7 @@ export const ComboboxField: FC<ComboboxFieldProps> = ({
   inputValue,
   items,
   label,
+  loading,
   name,
   onInputValueChange,
   onValueChange,
@@ -39,6 +43,7 @@ export const ComboboxField: FC<ComboboxFieldProps> = ({
     <Field.Root className="relative flex flex-col gap-2">
       <Field.Label className="text-sm">{label}</Field.Label>
       <Combobox.Root
+        disabled={loading}
         inputValue={inputValue}
         items={items}
         itemToStringLabel={(item: ComboboxFieldItem) => item.label}
@@ -55,6 +60,12 @@ export const ComboboxField: FC<ComboboxFieldProps> = ({
           id={id}
           placeholder={placeholder}
         />
+        {loading && (
+          <Spinner
+            className="absolute top-10 left-1/2 -translate-x-1/2"
+            size="sm"
+          />
+        )}
         <Combobox.Trigger className="absolute top-10 right-4 text-gray-500">
           <Combobox.Icon>
             <ChevronDown size={16} />
