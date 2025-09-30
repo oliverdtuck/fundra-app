@@ -4,7 +4,7 @@ import clsx, { type ClassValue } from 'clsx';
 
 interface SpinnerProps {
   className?: ClassValue;
-  size?: 'md' | 'sm';
+  size?: 'lg' | 'md' | 'sm';
   variant?: 'default' | 'white';
 }
 
@@ -23,7 +23,8 @@ export const Spinner: FC<SpinnerProps> = ({
         'border-x-white/30 border-t-white border-b-white/30':
           variant === 'white',
         'size-4 border-2': size === 'sm',
-        'size-8 border-4': size === 'md'
+        'size-8 border-4': size === 'md',
+        'size-12 border-6': size === 'lg'
       },
       className
     )}

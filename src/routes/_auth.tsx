@@ -97,7 +97,7 @@ export const Route = createFileRoute('/_auth')({
   },
   pendingComponent: () => (
     <main className="flex h-screen items-center justify-center">
-      <Spinner />
+      <Spinner size="lg" />
     </main>
   )
 });

@@ -134,7 +134,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   if (isLoading) {
     return (
       <main className="flex h-screen items-center justify-center">
-        <Spinner />
+        <Spinner size="lg" />
       </main>
     );
   }
