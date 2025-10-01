@@ -5,7 +5,7 @@ import { ArrowLeft } from 'lucide-react';
 
 export const BackLink: FC<Pick<LinkProps, 'to'>> = ({ to }) => (
   <Link
-    className="flex items-center justify-center gap-2 rounded-lg bg-gray-200 px-4 py-2"
+    className="flex items-center justify-center gap-2 rounded-lg bg-gray-200 px-4 py-2 hover:bg-gray-300"
     to={to}
   >
     <ArrowLeft size={16} />
