@@ -18,37 +18,39 @@ export const OnboardingNavigationLink: FC<OnboardingNavigationLinkProps> = ({
   index,
   to
 }) => (
-  <Link
-    aria-label={`${children}${completed ? ' - completed' : ''}`}
-    className="flex items-center gap-4 text-sm disabled:cursor-not-allowed"
-    disabled={disabled}
-    to={to}
-    {...(disabled && {
-      'aria-disabled': true,
-      tabIndex: -1
-    })}
-  >
-    {({ isActive }) => (
-      <>
-        <span
-          className={clsx(
-            'flex size-8 items-center justify-center rounded-full',
-            {
-              'bg-black text-white': completed,
-              'bg-gray-300': !completed
-            }
-          )}
-        >
-          {completed ? <Check size={16} /> : index + 1}
-        </span>
-        <span
-          className={clsx('hidden md:block', {
-            'text-gray-500': !isActive
-          })}
-        >
-          {children}
-        </span>
-      </>
-    )}
-  </Link>
+  <li>
+    <Link
+      aria-label={`${children}${completed ? ' - completed' : ''}`}
+      className="flex items-center gap-4 text-sm disabled:cursor-not-allowed"
+      disabled={disabled}
+      to={to}
+      {...(disabled && {
+        'aria-disabled': true,
+        tabIndex: -1
+      })}
+    >
+      {({ isActive }) => (
+        <>
+          <span
+            className={clsx(
+              'flex size-8 items-center justify-center rounded-full',
+              {
+                'bg-black text-white': completed,
+                'bg-gray-300': !completed
+              }
+            )}
+          >
+            {completed ? <Check size={16} /> : index + 1}
+          </span>
+          <span
+            className={clsx('hidden md:block', {
+              'text-gray-500': !isActive
+            })}
+          >
+            {children}
+          </span>
+        </>
+      )}
+    </Link>
+  </li>
 );
