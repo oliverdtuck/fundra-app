@@ -15,7 +15,7 @@ type SubSectorsQueryOptions = Omit<
   'queryFn' | 'queryKey'
 >;
 
-export const readSubSectors = async (primarySectorId: string) => {
+const readSubSectors = async (primarySectorId: string) => {
   const { data } = await api.get<SubSector[]>(
     `/primary-sectors/${primarySectorId}/sub-sectors`
   );

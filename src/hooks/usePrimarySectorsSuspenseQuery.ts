@@ -15,7 +15,7 @@ type PrimarySectorsSuspenseQueryOptions = Omit<
   'queryFn' | 'queryKey'
 >;
 
-export const readPrimarySectors = async () => {
+const readPrimarySectors = async () => {
   const { data } = await api.get<PrimarySector[]>('/primary-sectors');
 
   return data;

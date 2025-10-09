@@ -56,7 +56,7 @@ const Component: FC = () => {
     }
 
     return (
-      fundingRoundItems.find((item) => item.value === fundingRound) ?? null
+      fundingRoundItems.find((item) => item.value === fundingRound.id) ?? null
     );
   }, [companiesSuspenseQuery.data, fundingRoundItems]);
   const [fundingRoundValue, setFundingRoundValue] =

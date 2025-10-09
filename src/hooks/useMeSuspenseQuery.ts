@@ -15,7 +15,7 @@ type MeSuspenseQueryOptions = Omit<
   'queryFn' | 'queryKey'
 >;
 
-export const readMe = async () => {
+const readMe = async () => {
   const { data } = await api.get<User>('/users/me');
 
   return data;

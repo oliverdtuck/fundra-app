@@ -15,7 +15,7 @@ type CompanyThesesSuspenseQueryOptions = Omit<
   'queryFn' | 'queryKey'
 >;
 
-export const readCompanyTheses = async (companyId: string) => {
+const readCompanyTheses = async (companyId: string) => {
   const { data } = await api.get<Thesis[]>(`/companies/${companyId}/theses`);
 
   return data;

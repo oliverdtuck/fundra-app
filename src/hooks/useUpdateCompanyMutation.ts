@@ -30,7 +30,7 @@ export const useUpdateCompanyMutation = (
     mutationFn: async ({
       companyId,
       countryCode,
-      fundingRound,
+      fundingRoundId,
       name,
       productsAndServices,
       subSectorId,
@@ -43,7 +43,7 @@ export const useUpdateCompanyMutation = (
         UpdateCompanySchema
       >(`/companies/${companyId}`, {
         countryCode,
-        fundingRound,
+        fundingRoundId,
         name,
         productsAndServices,
         subSectorId,

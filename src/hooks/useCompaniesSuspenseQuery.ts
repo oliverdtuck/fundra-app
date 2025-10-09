@@ -15,7 +15,7 @@ type CompaniesSuspenseQueryOptions = Omit<
   'queryFn' | 'queryKey'
 >;
 
-export const readCompanies = async () => {
+const readCompanies = async () => {
   const { data } = await api.get<Company[]>('/companies');
 
   return data;

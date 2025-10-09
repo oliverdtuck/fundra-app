@@ -15,7 +15,7 @@ type CountriesSuspenseQueryOptions = Omit<
   'queryFn' | 'queryKey'
 >;
 
-export const readCountries = async () => {
+const readCountries = async () => {
   const { data } = await api.get<Country[]>('/countries');
 
   return data;

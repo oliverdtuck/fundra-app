@@ -1,1 +1,4 @@
-export type FundingRound = 'pre_seed' | 'seed' | 'series_a';
+export interface FundingRound {
+  id: string;
+  name: string;
+}
