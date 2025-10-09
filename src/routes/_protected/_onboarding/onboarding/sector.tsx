@@ -53,7 +53,8 @@ const Component: FC = () => {
     [primarySectorsSuspenseQuery.data]
   );
   const defaultPrimarySectorValue = useMemo<ComboboxFieldItem | null>(() => {
-    const primarySectorId = companiesSuspenseQuery.data[0].primarySector?.id;
+    const primarySectorId =
+      companiesSuspenseQuery.data[0].subSector?.primarySector.id;
 
     if (!primarySectorId) {
       return null;
