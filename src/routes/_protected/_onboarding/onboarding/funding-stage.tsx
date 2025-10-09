@@ -17,6 +17,10 @@ import {
   companiesSuspenseQueryOptions,
   useCompaniesSuspenseQuery
 } from '../../../../hooks/useCompaniesSuspenseQuery';
+import {
+  fundingRoundsSuspenseQueryOptions,
+  useFundingRoundsSuspenseQuery
+} from '../../../../hooks/useFundingRoundsSuspenseQuery';
 import { useUpdateCompanyMutation } from '../../../../hooks/useUpdateCompanyMutation';
 import { updateCompanySchema } from '../../../../schemas/updateCompanySchema';
 
@@ -29,25 +33,17 @@ const Component: FC = () => {
       });
     }
   });
-  const companiesSuspenseQuery = useCompaniesSuspenseQuery();
   const [errors, setErrors] = useState({});
+  const fundingRoundsSuspenseQuery = useFundingRoundsSuspenseQuery();
   const fundingRoundItems = useMemo<ComboboxFieldItem[]>(
-    () => [
-      {
-        label: 'Pre-Seed',
-        value: 'pre_seed'
-      },
-      {
-        label: 'Seed',
-        value: 'seed'
-      },
-      {
-        label: 'Series A',
-        value: 'series_a'
-      }
-    ],
-    []
+    () =>
+      fundingRoundsSuspenseQuery.data.map((fundingRound) => ({
+        label: fundingRound.name,
+        value: fundingRound.id
+      })),
+    [fundingRoundsSuspenseQuery.data]
   );
+  const companiesSuspenseQuery = useCompaniesSuspenseQuery();
   const defaultFundingRoundValue = useMemo<ComboboxFieldItem | null>(() => {
     const [{ fundingRound }] = companiesSuspenseQuery.data;
 
@@ -70,7 +66,7 @@ const Component: FC = () => {
 
     try {
       const variables = updateCompanySchema.parse({
-        fundingRound: fundingRoundValue?.value
+        fundingRoundId: fundingRoundValue?.value
       });
       const [{ id }] = companiesSuspenseQuery.data;
 
@@ -106,6 +102,7 @@ const Component: FC = () => {
           inputValue={fundingRoundInputValue}
           items={fundingRoundItems}
           label="Funding Round"
+          loading={fundingRoundsSuspenseQuery.isLoading}
           name="fundingRound"
           onInputValueChange={setFundingRoundInputValue}
           onValueChange={setFundingRoundValue}
@@ -149,6 +146,8 @@ export const Route = createFileRoute(
         to: '/onboarding/sector'
       });
     }
+
+    await queryClient.ensureQueryData(fundingRoundsSuspenseQueryOptions());
   },
   pendingComponent: () => (
     <Card>
