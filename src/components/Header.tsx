@@ -3,7 +3,7 @@ import type { FC, ReactNode } from 'react';
 import { Logo } from './Logo';
 
 interface HeaderProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export const Header: FC<HeaderProps> = ({ children }) => (

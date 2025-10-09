@@ -2,7 +2,6 @@ import type { FC } from 'react';
 
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
 import { getCurrentUser } from 'aws-amplify/auth';
-import { CircleQuestionMark } from 'lucide-react';
 
 import { Header } from '../components/Header';
 import { Spinner } from '../components/Spinner';
@@ -11,11 +10,7 @@ import { companyThesesSuspenseQueryOptions } from '../hooks/useCompanyThesesSusp
 
 const Component: FC = () => (
   <>
-    <Header>
-      <button className="text-gray-500" type="button">
-        <CircleQuestionMark />
-      </button>
-    </Header>
+    <Header />
     <main className="flex justify-center px-4 py-16">
       <div className="flex max-w-md grow flex-col gap-6">
         <Outlet />
