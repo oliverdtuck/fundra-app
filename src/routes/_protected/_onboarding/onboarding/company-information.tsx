@@ -57,6 +57,10 @@ const Component: FC = () => {
     [countriesSuspenseQuery.data]
   );
   const defaultCountryValue = useMemo<ComboboxFieldItem | null>(() => {
+    if (companiesSuspenseQuery.data.length === 0) {
+      return null;
+    }
+
     const [{ country }] = companiesSuspenseQuery.data;
     const { code } = country;
 
