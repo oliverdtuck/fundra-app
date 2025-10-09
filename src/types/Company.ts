@@ -5,7 +5,6 @@ import type { SubSector } from './SubSector';
 
 export interface Company {
   country: Country;
-  createdAt: string;
   fundingRound: FundingRound | null;
   id: string;
   name: string;
@@ -13,6 +12,5 @@ export interface Company {
   productsAndServices: null | string;
   subSector: null | SubSector;
   targetCustomers: null | string;
-  updatedAt: string;
   website: null | string;
 }

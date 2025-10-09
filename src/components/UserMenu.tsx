@@ -10,10 +10,10 @@ import { useMeSuspenseQuery } from '../hooks/useMeSuspenseQuery';
 
 export const UserMenu: FC = () => {
   const meSuspenseQuery = useMeSuspenseQuery();
-  const auth = useAuth();
+  const { signOut } = useAuth();
 
-  const signOut = () => {
-    void auth.signOut();
+  const handleSignOut = () => {
+    void signOut();
   };
 
   return (
@@ -39,7 +39,7 @@ export const UserMenu: FC = () => {
             </Menu.Item>
             <Menu.Item
               className="flex items-center justify-between p-2 data-[highlighted]:rounded-lg data-[highlighted]:bg-gray-100"
-              onClick={signOut}
+              onClick={handleSignOut}
             >
               <span>Log Out</span>
               <LogOut className="text-gray-500" size={16} />

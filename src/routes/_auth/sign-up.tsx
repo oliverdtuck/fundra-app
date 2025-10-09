@@ -1,7 +1,6 @@
 import { Form } from '@base-ui-components/react/form';
-import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import { type FC, type FormEventHandler, useState } from 'react';
-import toast from 'react-hot-toast';
 import * as z from 'zod';
 
 import { Button } from '../../components/Button';
@@ -12,29 +11,8 @@ import { useAuth } from '../../hooks/useAuth';
 import { signUpSchema } from '../../schemas/signUpSchema';
 
 const Component: FC = () => {
-  const auth = useAuth();
-  const { isSigningUp } = auth;
-  const navigate = useNavigate();
+  const { isSigningUp, signUp } = useAuth();
   const [errors, setErrors] = useState({});
-
-  const signUp = async (name: string, email: string, password: string) => {
-    try {
-      await auth.signUp(name, email, password);
-      toast.success(
-        'Account created successfully! Please check your email for verification code'
-      );
-      await navigate({
-        search: {
-          email
-        },
-        to: '/confirm'
-      });
-    } catch (error) {
-      if (error instanceof Error) {
-        toast.error(error.message);
-      }
-    }
-  };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -46,7 +24,15 @@ const Component: FC = () => {
         Object.fromEntries(formData)
       );
 
-      void signUp(name, email, password);
+      void signUp({
+        options: {
+          userAttributes: {
+            name
+          }
+        },
+        password,
+        username: email
+      });
     } catch (error) {
       if (error instanceof z.ZodError) {
         const { fieldErrors } = z.flattenError(error);

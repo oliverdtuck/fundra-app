@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
+import { getCurrentUser } from 'aws-amplify/auth';
 import { CircleQuestionMark } from 'lucide-react';
 
 import { Header } from '../components/Header';
@@ -26,74 +27,74 @@ const Component: FC = () => (
 export const Route = createFileRoute('/_auth')({
   component: Component,
   loader: async ({ context }) => {
-    const { auth, queryClient } = context;
-    const { user } = auth;
+    try {
+      await getCurrentUser();
 
-    if (!user) {
+      const { queryClient } = context;
+      const companies = await queryClient.ensureQueryData(
+        companiesSuspenseQueryOptions()
+      );
+
+      if (companies.length === 0) {
+        // eslint-disable-next-line @typescript-eslint/only-throw-error
+        throw redirect({
+          to: '/onboarding/company-information'
+        });
+      }
+
+      const [
+        { fundingRound, id, productsAndServices, subSector, targetCustomers }
+      ] = companies;
+
+      if (!subSector) {
+        // eslint-disable-next-line @typescript-eslint/only-throw-error
+        throw redirect({
+          to: '/onboarding/sector'
+        });
+      }
+
+      if (!fundingRound) {
+        // eslint-disable-next-line @typescript-eslint/only-throw-error
+        throw redirect({
+          to: '/onboarding/funding-stage'
+        });
+      }
+
+      if (!productsAndServices) {
+        // eslint-disable-next-line @typescript-eslint/only-throw-error
+        throw redirect({
+          to: '/onboarding/overview/products-and-services'
+        });
+      }
+
+      if (!targetCustomers) {
+        // eslint-disable-next-line @typescript-eslint/only-throw-error
+        throw redirect({
+          to: '/onboarding/overview/target-customers'
+        });
+      }
+
+      const companyTheses = await queryClient.ensureQueryData(
+        companyThesesSuspenseQueryOptions(id)
+      );
+
+      if (companyTheses.length === 0) {
+        // eslint-disable-next-line @typescript-eslint/only-throw-error
+        throw redirect({
+          to: '/onboarding/overview/investment-thesis'
+        });
+      }
+
+      // eslint-disable-next-line @typescript-eslint/only-throw-error
+      throw redirect({
+        params: {
+          companyId: id
+        },
+        to: '/companies/$companyId'
+      });
+    } catch {
       return;
     }
-
-    const companies = await queryClient.ensureQueryData(
-      companiesSuspenseQueryOptions()
-    );
-
-    if (companies.length === 0) {
-      // eslint-disable-next-line @typescript-eslint/only-throw-error
-      throw redirect({
-        to: '/onboarding/company-information'
-      });
-    }
-
-    const [
-      { fundingRound, id, productsAndServices, subSector, targetCustomers }
-    ] = companies;
-
-    if (!subSector) {
-      // eslint-disable-next-line @typescript-eslint/only-throw-error
-      throw redirect({
-        to: '/onboarding/sector'
-      });
-    }
-
-    if (!fundingRound) {
-      // eslint-disable-next-line @typescript-eslint/only-throw-error
-      throw redirect({
-        to: '/onboarding/funding-stage'
-      });
-    }
-
-    if (!productsAndServices) {
-      // eslint-disable-next-line @typescript-eslint/only-throw-error
-      throw redirect({
-        to: '/onboarding/overview/products-and-services'
-      });
-    }
-
-    if (!targetCustomers) {
-      // eslint-disable-next-line @typescript-eslint/only-throw-error
-      throw redirect({
-        to: '/onboarding/overview/target-customers'
-      });
-    }
-
-    const companyTheses = await queryClient.ensureQueryData(
-      companyThesesSuspenseQueryOptions(id)
-    );
-
-    if (companyTheses.length === 0) {
-      // eslint-disable-next-line @typescript-eslint/only-throw-error
-      throw redirect({
-        to: '/onboarding/overview/investment-thesis'
-      });
-    }
-
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw redirect({
-      params: {
-        companyId: id
-      },
-      to: '/companies/$companyId'
-    });
   },
   pendingComponent: () => (
     <main className="flex h-screen items-center justify-center">

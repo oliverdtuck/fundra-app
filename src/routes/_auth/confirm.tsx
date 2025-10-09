@@ -1,7 +1,6 @@
 import { Form } from '@base-ui-components/react/form';
-import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
 import { type FC, type FormEventHandler, useState } from 'react';
-import toast from 'react-hot-toast';
 import * as z from 'zod';
 
 import { Button } from '../../components/Button';
@@ -12,25 +11,9 @@ import { useAuth } from '../../hooks/useAuth';
 import { confirmSignUpSchema } from '../../schemas/confirmSignUpSchema';
 
 const Component: FC = () => {
-  const auth = useAuth();
-  const { isConfirmingSignUp } = auth;
+  const { confirmSignUp, isConfirmingSignUp } = useAuth();
   const { email } = Route.useSearch();
-  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
-
-  const confirmSignUp = async (code: string) => {
-    try {
-      await auth.confirmSignUp(email, code);
-      toast.success('Account confirmed successfully! You can now log in');
-      await navigate({
-        to: '/log-in'
-      });
-    } catch (error) {
-      if (error instanceof Error) {
-        toast.error(error.message);
-      }
-    }
-  };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -38,9 +21,14 @@ const Component: FC = () => {
     const formData = new FormData(event.currentTarget);
 
     try {
-      const { code } = confirmSignUpSchema.parse(Object.fromEntries(formData));
+      const { confirmationCode } = confirmSignUpSchema.parse(
+        Object.fromEntries(formData)
+      );
 
-      void confirmSignUp(code);
+      void confirmSignUp({
+        confirmationCode,
+        username: email
+      });
     } catch (error) {
       if (error instanceof z.ZodError) {
         const { fieldErrors } = z.flattenError(error);
@@ -67,9 +55,9 @@ const Component: FC = () => {
         >
           <TextField
             autoFocus
-            label="Code"
-            name="code"
-            placeholder="Code"
+            label="Confirmation Code"
+            name="confirmationCode"
+            placeholder="Confirmation Code"
             required
             type="text"
           />

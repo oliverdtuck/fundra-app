@@ -1,7 +1,6 @@
 import { Form } from '@base-ui-components/react/form';
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { type FC, type FormEventHandler, useState } from 'react';
-import toast from 'react-hot-toast';
 import * as z from 'zod';
 
 import { Button } from '../../components/Button';
@@ -12,19 +11,8 @@ import { useAuth } from '../../hooks/useAuth';
 import { logInSchema } from '../../schemas/logInSchema';
 
 const Component: FC = () => {
-  const auth = useAuth();
-  const { isSigningIn } = auth;
+  const { isSigningIn, signIn } = useAuth();
   const [errors, setErrors] = useState({});
-
-  const signIn = async (email: string, password: string) => {
-    try {
-      await auth.signIn(email, password);
-    } catch (error) {
-      if (error instanceof Error) {
-        toast.error(error.message);
-      }
-    }
-  };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -36,7 +24,10 @@ const Component: FC = () => {
         Object.fromEntries(formData)
       );
 
-      void signIn(email, password);
+      void signIn({
+        password,
+        username: email
+      });
     } catch (error) {
       if (error instanceof z.ZodError) {
         const { fieldErrors } = z.flattenError(error);

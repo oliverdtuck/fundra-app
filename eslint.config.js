@@ -31,7 +31,7 @@ export default defineConfig([
       parserOptions: {
         projectService: {
           allowDefaultProject: ['eslint.config.js'],
-          defaultProject: 'tsconfig.app.json'
+          defaultProject: 'tsconfig.node.json'
         },
         tsconfigRootDir: import.meta.dirname
       }
