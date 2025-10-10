@@ -10,11 +10,6 @@ import type { SubSector } from '../types/SubSector';
 
 import { api } from '../lib/api';
 
-type SubSectorsQueryOptions = Omit<
-  UseQueryOptions<SubSector[], AxiosError>,
-  'queryFn' | 'queryKey'
->;
-
 const readSubSectors = async (primarySectorId: string) => {
   const { data } = await api.get<SubSector[]>(
     `/primary-sectors/${primarySectorId}/sub-sectors`
@@ -22,6 +17,11 @@ const readSubSectors = async (primarySectorId: string) => {
 
   return data;
 };
+
+type SubSectorsQueryOptions = Omit<
+  UseQueryOptions<SubSector[], AxiosError>,
+  'queryFn' | 'queryKey'
+>;
 
 export const subSectorsQueryOptions = (
   primarySectorId: string,

@@ -10,16 +10,16 @@ import type { Thesis } from '../types/Thesis';
 
 import { api } from '../lib/api';
 
-type CompanyThesesSuspenseQueryOptions = Omit<
-  UseSuspenseQueryOptions<Thesis[], AxiosError>,
-  'queryFn' | 'queryKey'
->;
-
 const readCompanyTheses = async (companyId: string) => {
   const { data } = await api.get<Thesis[]>(`/companies/${companyId}/theses`);
 
   return data;
 };
+
+type CompanyThesesSuspenseQueryOptions = Omit<
+  UseSuspenseQueryOptions<Thesis[], AxiosError>,
+  'queryFn' | 'queryKey'
+>;
 
 export const companyThesesSuspenseQueryOptions = (
   companyId: string,

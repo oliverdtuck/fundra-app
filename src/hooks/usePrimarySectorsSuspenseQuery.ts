@@ -10,16 +10,16 @@ import type { PrimarySector } from '../types/PrimarySector';
 
 import { api } from '../lib/api';
 
-type PrimarySectorsSuspenseQueryOptions = Omit<
-  UseSuspenseQueryOptions<PrimarySector[], AxiosError>,
-  'queryFn' | 'queryKey'
->;
-
 const readPrimarySectors = async () => {
   const { data } = await api.get<PrimarySector[]>('/primary-sectors');
 
   return data;
 };
+
+type PrimarySectorsSuspenseQueryOptions = Omit<
+  UseSuspenseQueryOptions<PrimarySector[], AxiosError>,
+  'queryFn' | 'queryKey'
+>;
 
 export const primarySectorsSuspenseQueryOptions = (
   options?: PrimarySectorsSuspenseQueryOptions

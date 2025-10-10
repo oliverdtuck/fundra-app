@@ -10,16 +10,16 @@ import type { Company } from '../types/Company';
 
 import { api } from '../lib/api';
 
-type CompaniesSuspenseQueryOptions = Omit<
-  UseSuspenseQueryOptions<Company[], AxiosError>,
-  'queryFn' | 'queryKey'
->;
-
 const readCompanies = async () => {
   const { data } = await api.get<Company[]>('/companies');
 
   return data;
 };
+
+type CompaniesSuspenseQueryOptions = Omit<
+  UseSuspenseQueryOptions<Company[], AxiosError>,
+  'queryFn' | 'queryKey'
+>;
 
 export const companiesSuspenseQueryOptions = (
   options?: CompaniesSuspenseQueryOptions

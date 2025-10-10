@@ -10,16 +10,16 @@ import type { User } from '../types/User';
 
 import { api } from '../lib/api';
 
-type MeSuspenseQueryOptions = Omit<
-  UseSuspenseQueryOptions<User, AxiosError>,
-  'queryFn' | 'queryKey'
->;
-
 const readMe = async () => {
   const { data } = await api.get<User>('/users/me');
 
   return data;
 };
+
+type MeSuspenseQueryOptions = Omit<
+  UseSuspenseQueryOptions<User, AxiosError>,
+  'queryFn' | 'queryKey'
+>;
 
 export const meSuspenseQueryOptions = (options?: MeSuspenseQueryOptions) =>
   queryOptions({

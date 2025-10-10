@@ -10,16 +10,16 @@ import type { FundingRound } from '../types/FundingRound';
 
 import { api } from '../lib/api';
 
-type FundingRoundsSuspenseQueryOptions = Omit<
-  UseSuspenseQueryOptions<FundingRound[], AxiosError>,
-  'queryFn' | 'queryKey'
->;
-
 const readFundingRounds = async () => {
   const { data } = await api.get<FundingRound[]>('/funding-rounds');
 
   return data;
 };
+
+type FundingRoundsSuspenseQueryOptions = Omit<
+  UseSuspenseQueryOptions<FundingRound[], AxiosError>,
+  'queryFn' | 'queryKey'
+>;
 
 export const fundingRoundsSuspenseQueryOptions = (
   options?: FundingRoundsSuspenseQueryOptions

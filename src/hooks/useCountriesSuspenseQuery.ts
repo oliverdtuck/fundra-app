@@ -10,16 +10,16 @@ import type { Country } from '../types/Country';
 
 import { api } from '../lib/api';
 
-type CountriesSuspenseQueryOptions = Omit<
-  UseSuspenseQueryOptions<Country[], AxiosError>,
-  'queryFn' | 'queryKey'
->;
-
 const readCountries = async () => {
   const { data } = await api.get<Country[]>('/countries');
 
   return data;
 };
+
+type CountriesSuspenseQueryOptions = Omit<
+  UseSuspenseQueryOptions<Country[], AxiosError>,
+  'queryFn' | 'queryKey'
+>;
 
 export const countriesSuspenseQueryOptions = (
   options?: CountriesSuspenseQueryOptions
