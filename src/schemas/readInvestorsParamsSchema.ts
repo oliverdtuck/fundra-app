@@ -3,9 +3,9 @@ import * as z from 'zod';
 import type { InvestorType } from '../types/InvestorType';
 
 export const readInvestorsParamsSchema = z.object({
-  countryCode: z.string().optional(),
-  fundingRoundId: z.string().optional(),
-  subSectorId: z.string().optional(),
-  thesisId: z.string().optional(),
-  type: z.enum<InvestorType[]>(['angel', 'vc']).optional()
+  countryCodes: z.array(z.string()).optional(),
+  fundingRoundIds: z.array(z.string()).optional(),
+  subSectorIds: z.array(z.string()).optional(),
+  thesisIds: z.array(z.string()).optional(),
+  types: z.array(z.enum<InvestorType[]>(['angel', 'vc'])).optional()
 });
