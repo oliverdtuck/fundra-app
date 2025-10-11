@@ -30,7 +30,7 @@ export const Button: FC<ButtonProps> = ({
 }) => (
   <button
     className={clsx(
-      'relative rounded-lg px-4 py-2 disabled:cursor-not-allowed disabled:opacity-80',
+      'relative flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-white disabled:cursor-not-allowed disabled:opacity-80',
       {
         'bg-black hover:bg-gray-800': variant === 'primary',
         'bg-red-500 hover:bg-red-600': variant === 'danger'
@@ -42,16 +42,29 @@ export const Button: FC<ButtonProps> = ({
     onClick={onClick}
     type={type}
   >
+    {StartIcon && (
+      <StartIcon
+        className={clsx({
+          invisible: loading
+        })}
+        size={16}
+      />
+    )}
     <span
-      className={clsx('flex items-center justify-center gap-2 text-white', {
-        invisible: loading,
-        visible: !loading
+      className={clsx('font-medium', {
+        invisible: loading
       })}
     >
-      {StartIcon && <StartIcon size={16} />}
-      <span className="font-medium">{children}</span>
-      {EndIcon && <EndIcon size={16} />}
+      {children}
     </span>
+    {EndIcon && (
+      <EndIcon
+        className={clsx({
+          invisible: loading
+        })}
+        size={16}
+      />
+    )}
     {loading && (
       <Spinner
         className="absolute top-1/2 left-1/2 -translate-1/2"
