@@ -14,7 +14,7 @@ const Component: FC = () => {
 
   return (
     <ul>
-      {investorsSuspenseQuery.data.map((investor) => (
+      {investorsSuspenseQuery.data.data.map((investor) => (
         <li key={investor.id}>{investor.type}</li>
       ))}
     </ul>

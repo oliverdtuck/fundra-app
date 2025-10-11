@@ -11,8 +11,15 @@ import type { ReadInvestorsParamsSchema } from '../types/ReadInvestorsParamsSche
 
 import { api } from '../lib/api';
 
+interface Data {
+  data: Investor[];
+  limit: number;
+  page: number;
+  total: number;
+}
+
 const readInvestors = async (params?: ReadInvestorsParamsSchema) => {
-  const { data } = await api.get<Investor[]>('/investors', {
+  const { data } = await api.get<Data>('/investors', {
     params
   });
 
@@ -20,7 +27,7 @@ const readInvestors = async (params?: ReadInvestorsParamsSchema) => {
 };
 
 type InvestorsSuspenseQueryOptions = Omit<
-  UseSuspenseQueryOptions<Investor[], AxiosError>,
+  UseSuspenseQueryOptions<Data, AxiosError>,
   'queryFn' | 'queryKey'
 >;
 
